@@ -1,0 +1,386 @@
+const cv.CV_8U 0
+const cv.CV_8S 1
+const cv.CV_16U 2
+const cv.CV_16S 3
+const cv.CV_32S 4
+const cv.CV_32F 5
+const cv.CV_64F 6
+const cv.CV_8UC1 (1-1)*8 + CV_8U
+const cv.CV_8UC2 (2-1)*8 + CV_8U
+const cv.CV_8UC3 (3-1)*8 + CV_8U
+const cv.CV_8UC4 (4-1)*8 + CV_8U
+const cv.CV_8SC1 (1-1)*8 + CV_8S
+const cv.CV_8SC2 (2-1)*8 + CV_8S
+const cv.CV_8SC3 (3-1)*8 + CV_8S
+const cv.CV_8SC4 (4-1)*8 + CV_8S
+const cv.CV_16UC1 (1-1)*8 + CV_16U
+const cv.CV_16UC2 (2-1)*8 + CV_16U
+const cv.CV_16UC3 (3-1)*8 + CV_16U
+const cv.CV_16UC4 (4-1)*8 + CV_16U
+const cv.CV_16SC1 (1-1)*8 + CV_16S
+const cv.CV_16SC2 (2-1)*8 + CV_16S
+const cv.CV_16SC3 (3-1)*8 + CV_16S
+const cv.CV_16SC4 (4-1)*8 + CV_16S
+const cv.CV_32SC1 (1-1)*8 + CV_32S
+const cv.CV_32SC2 (2-1)*8 + CV_32S
+const cv.CV_32SC3 (3-1)*8 + CV_32S
+const cv.CV_32SC4 (4-1)*8 + CV_32S
+const cv.CV_32FC1 (1-1)*8 + CV_32F
+const cv.CV_32FC2 (2-1)*8 + CV_32F
+const cv.CV_32FC3 (3-1)*8 + CV_32F
+const cv.CV_32FC4 (4-1)*8 + CV_32F
+const cv.CV_64FC1 (1-1)*8 + CV_64F
+const cv.CV_64FC2 (2-1)*8 + CV_64F
+const cv.CV_64FC3 (3-1)*8 + CV_64F
+const cv.CV_64FC4 (4-1)*8 + CV_64F
+class cv.Range
+    int start /RW
+    int end   /RW
+cv.Range.Range
+    int start
+    int end
+cv.Range.size int
+cv.Range.size bool
+cv.Range.all Range
+cv.Range.all Range
+cv.Range.operator== bool
+    Range r
+cv.Range.operator!= bool
+    Range r
+cv.Range.operator& Range
+    Range r
+cv.Range.operator+ Range
+    int delta
+cv.Range.operator- Range
+    int delta
+class cv.String
+cv.String.String
+cv.String.String
+    c_string str
+    size_t length
+cv.String.String
+    String other
+cv.String.size size_t
+cv.String.length size_t
+cv.String.operator[] char
+    size_t idx
+cv.String.begin const_c_string
+cv.String.end const_c_string
+cv.String.c_str const_c_string
+cv.String.empty bool
+cv.String.clear void
+cv.String.compare int
+    String str
+cv.String.swap void
+    String str /IO
+class cv.Scalar
+cv.Scalar.Scalar
+cv.Scalar.Scalar
+    double v0
+cv.Scalar.Scalar
+    double v0
+    double v1
+    double v2 0
+    double v3 0
+cv.Scalar.all Scalar /S
+    double v0
+cv.Scalar.mul Scalar
+    Scalar other
+    double scale 1
+cv.Scalar.conj Scalar
+cv.Scalar.isReal bool
+class cv.Point
+    int x /RW
+    int y /RW
+class cv.Rect
+    int x /RW
+    int y /RW
+    int width /RW
+    int height /RW
+cv.Point.Point
+    int x
+    int y
+cv.Point.Point
+    Point pt
+cv.Point.dot int
+    Point pt
+cv.Point.dot double
+    Point pt
+cv.Point.cross double
+    Point pt
+cv.Point.inside bool
+    Rect rect
+cv.Point.operator+ void
+    Point pt
+class cv.Point2f
+    float x /RW
+    float y /RW
+cv.Point2f.Point2f
+    float x
+    float y
+cv.Point2f.Point2f
+    Point2f pt
+cv.Point2f.dot float
+    Point2f pt
+cv.Point2f.dot double
+    Point2f pt
+cv.Point2f.cross double
+    Point2f pt
+cv.Point2f.operator+ void
+    Point2f pt
+class cv.Point2d
+    double x /RW
+    double y /RW
+cv.Point2d.Point2d
+    double x
+    double y
+cv.Point2d.operator+ void
+    Point2d pt
+cv.Point2d.Point2d
+    Point2d pt
+cv.Point2d.dot double
+    Point2d pt
+cv.Point2d.dot double
+    Point2d pt
+cv.Point2d.cross double
+    Point2d pt
+class cv.Size
+    int width  /RW
+    int height /RW
+cv.Size.Size
+cv.Size.Size
+    Size sz
+cv.Size.Size
+    Point  pt
+cv.Size.Size
+    int width
+    int height
+cv.Size.area int
+class cv.Size2f
+    int width  /RW
+    int height /RW
+cv.Size2f.Size2f
+cv.Size2f.Size2f
+    Size2f sz
+cv.Size2f.Size2f
+    Point2f  pt
+cv.Size2f.Size2f
+    int width
+    int height
+cv.Size2f.area int
+cv.Rect.Rect
+cv.Rect.Rect
+    Rect rect
+cv.Rect.Rect
+    int x
+    int y
+    int width
+    int height
+cv.Rect.tl Point
+cv.Rect.br Point
+cv.Rect.size Size
+cv.Rect.area int
+cv.Rect.contains bool
+    Point point
+class CvTermCriteria
+class CvDTreeNode
+class CvSlice
+class cvflann.flann_algorithm_t
+class cvflann.flann_distance_t
+class cv.RotatedRect
+    Point2f center /RW
+    Size2f size    /RW
+    float angle    /RW
+cv.RotatedRect.RotatedRect
+cv.RotatedRect.RotatedRect
+    Point2f center
+    Size2f size
+    float angle
+cv.RotatedRect.boundingRect Rect
+class cv.FileNode
+class cv.Vec2d
+cv.Vec2d.Vec2d
+cv.Vec2d.Vec2d
+    Vec2d vec
+cv.Vec2d.Vec2d
+    double t1
+    double t2
+cv.Vec2d.all Vec2d /S
+    double alpha
+cv.Vec2d.mul Vec2d
+    Vec2d other
+cv.Vec2d.conj Vec2d
+cv.Vec2d.operator[] double
+    int i
+class cv.Vec3d
+class cv.Vec4d
+class cv.Vec4f
+class cv.Vec6f
+class cv.TermCriteria
+class cv.flann::IndexParams
+class cv.flann::SearchParams
+class cv.FeatureDetector
+class cv.Mat
+    int flags
+    int rows
+    int cols
+    size_t step
+    uchar* data
+cv.Mat.Mat
+cv.Mat.Mat
+    Mat m
+cv.Mat.Mat
+    Size size
+    int type
+cv.Mat.Mat
+    int rows
+    int cols
+    int type
+cv.Mat.Mat
+    int rows
+    int cols
+    int type
+    void* data 
+    size_t step AUTO_STEP
+cv.Mat.operator+ Mat
+    Mat mat
+cv.Mat.operator+ Mat
+    double val
+cv.Mat.operator+ Mat
+    int val
+cv.Mat.operator- Mat
+    Mat mat
+cv.Mat.operator- Mat
+    double val
+cv.Mat.operator- Mat
+    int val
+cv.Mat.operator* Mat
+    Mat mat
+cv.Mat.operator* Mat
+    double val
+cv.Mat.operator* Mat
+    int val
+cv.Mat.operator/ Mat
+    Mat mat
+cv.Mat.operator/ Mat
+    double val
+cv.Mat.operator/ Mat
+    int val
+cv.Mat.row Mat
+    int y
+cv.Mat.col Mat
+    int c
+cv.Mat.rowRange Mat
+    int startrow
+    int endrow
+cv.Mat.rowRange Mat
+        Range r
+cv.Mat.colRange Mat
+    int startcol
+    int endcol
+cv.Mat.colRange Mat
+    Range r
+cv.Mat.diag Mat
+    int d 0
+cv.Mat.clone Mat
+cv.Mat.copyTo void
+    Mat m /O
+cv.Mat.copyTo void
+    Mat m /O
+    Mat mask /IO
+cv.Mat.convertTo void
+    Mat m /O
+    int rtype
+    double alpha 1
+    double beta 0
+cv.Mat.assignTo void
+    Mat m /O
+    int type -1
+cv.Mat.reshape Mat
+    int cn
+    int rows 0
+cv.Mat.t Mat
+cv.Mat.inv Mat
+    int method DECOMP_LU
+cv.Mat.mul Mat
+    Mat m
+    double scale 1
+cv.Mat.cross Mat
+    Mat m
+cv.Mat.dot double
+    Mat m
+cv.Mat.zeros Mat /S
+    int rows
+    int cols
+    int type
+cv.Mat.zeros Mat /S
+    Size size
+    int type
+cv.Mat.ones Mat /S
+    int rows
+    int cols
+    int type
+cv.Mat.ones Mat /S
+    Size size
+    int type
+cv.Mat.eye Mat /S
+    int rows
+    int cols
+    int type
+cv.Mat.eye Mat /S
+    Size size
+    int type
+cv.Mat.create void
+    int rows
+    int cols
+    int type
+cv.Mat.create void
+    Size size
+    int type
+cv.Mat.isContinuous bool
+cv.Mat.isSubmatrix bool
+cv.Mat.elemSize size_t
+cv.Mat.elemSize1 size_t
+cv.Mat.type int
+cv.Mat.depth int
+cv.Mat.channels int
+cv.Mat.step1 size_t
+    int i 0
+cv.Mat.empty bool
+cv.Mat.total size_t
+cv.Mat.checkVector int
+    int elemChannels
+    int depth -1
+    bool requireContinuous true
+cv.Mat.ptr uchar*
+    int i0 0
+cv.Mat.ptr uchar*
+    int i0
+    int i1
+cv.Mat.ptr uchar*
+    int i0
+    int i1
+    int i2
+class cv.RNG
+    uint64 state
+cv.RNG.RNG
+cv.RNG.RNG
+    uint64 state
+cv.RNG.uniform int
+    int a
+    int b
+cv.RNG.uniform float 
+    float a
+    float b
+cv.RNG.uniform double 
+    double a
+    double b
+cv.RNG.fill void
+    Mat mat /IO
+    int distType
+    Mat a
+    Mat b
+    bool saturateRange false
+cv.RNG.gaussian double
+    double sigma
+
