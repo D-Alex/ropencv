@@ -64,6 +64,7 @@ module Rbind
 
         def specialize_ruby
             "    def method_missing(m,*args)\n"\
+            "        raise \"Ptr #{self} is empty. Cannot call \#{m} on it!\" if empty\n"\
             "        obj.method(m).call(*args)\n"\
             "    end\n"
         end
