@@ -112,5 +112,6 @@ rbind.cv.chamerMatching.parameter(1).add_flag(:IO)
 rbind.cv.chamerMatching.parameter(2).add_flag(:IO)
 rbind.cv.operation("drawKeypoints").parameter(3).default_value = "Scalar(-1,-1,-1,-1)"
 
+rbind.generator_ruby.file_prefix = "opencv"
 rbind.generate(File.join(File.dirname(__FILE__),"src"),File.join(File.dirname(__FILE__),"..","lib","opencv"))
 rbind.build

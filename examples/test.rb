@@ -1,5 +1,4 @@
 require './../lib/opencv'
-require 'pp'
 include OpenCV
 
 mat = cv::imread("logo.png")
