@@ -76,7 +76,7 @@ module Rbind
             module Vector
                 class #{GeneratorRuby.normalize_type_name(@vector_type.name)}
                     def self.new
-                        #{GeneratorRuby.normalize_type_name(self.name)}.new
+                        ::#{GeneratorRuby.normalize_type_name(self.name)}.new
                     end
                 end
             end
@@ -100,6 +100,9 @@ end
 rbind.parse File.join(File.dirname(__FILE__),"opencv.txt")
 rbind.use_namespace rbind.cv
 rbind.parse_headers
+# add some functions which are not exported by default but
+# are supported by rbind
+rbind.parse File.join(File.dirname(__FILE__),"opencv2.txt")
 
 rbind.cv.BRISK.generateKernel.parameter(0).add_flag(:IO)
 rbind.cv.BRISK.generateKernel.parameter(1).add_flag(:IO)
@@ -111,8 +114,7 @@ rbind.cv.putText.parameter(0).add_flag(:IO)
 rbind.cv.chamerMatching.parameter(0).add_flag(:IO)
 rbind.cv.chamerMatching.parameter(1).add_flag(:IO)
 rbind.cv.chamerMatching.parameter(2).add_flag(:IO)
-rbind.cv.operation("drawKeypoints").parameter(3).default_value = "Scalar(-1,-1,-1,-1)"
 
 rbind.generator_ruby.file_prefix = "opencv"
 rbind.generate(File.join(File.dirname(__FILE__),"src"),File.join(File.dirname(__FILE__),"..","lib","opencv"))
-rbind.build
+#rbind.build
