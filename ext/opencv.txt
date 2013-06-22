@@ -341,6 +341,7 @@ cv.Mat.isContinuous bool
 cv.Mat.isSubmatrix bool
 cv.Mat.elemSize size_t
 cv.Mat.elemSize1 size_t
+cv.Mat.size Size
 cv.Mat.type int
 cv.Mat.depth int
 cv.Mat.channels int

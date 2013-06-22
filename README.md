@@ -9,6 +9,13 @@ You have to install opencv 2.4.9 or higher first. After this you can install the
 - cmake ..
 - make install
 
+# Additional methods 
+The following methods not available for python or java are automatically wrapped by this package:
+- drawMatches
+- findEssentialMat
+- recoverPose
+
+
 # Example1
 
     require 'opencv'

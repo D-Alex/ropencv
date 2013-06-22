@@ -10,4 +10,22 @@ cv.drawMatches void
     vector_char matchesMask std::vector<char>()
     int flags DrawMatchesFlags::DEFAULT
 cv.morphologyDefaultBorderValue Scalar
+cv.findEssentialMat Mat 
+    Mat points1 
+    Mat points2 
+    double focal 1.0
+    Point2d pp Point2d(0, 0)
+    int method RANSAC
+    double prob 0.999
+    double threshold 1.0
+    Mat mask Mat()/O; /O
+cv.recoverPose int 
+    Mat E 
+    Mat points1 
+    Mat points2 
+    Mat R /O; /O
+    Mat t /O; /O
+    double focal 1.0
+    Point2d pp Point2d(0, 0)
+    Mat mask Mat()/IO; /IO
 
