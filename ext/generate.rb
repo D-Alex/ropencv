@@ -72,7 +72,18 @@ module Rbind
 
     class RVector < RStruct
         def specialize_ruby
-            %Q|Kernel.eval %Q{ module ::OpenCV
+            %Q$ include Enumerable
+            def each(&block)
+                if block
+                     s = size
+                     0.upto(s-1) do |i|
+                         yield self[i]
+                     end
+                else
+                    Enumerator.new(self)
+                end
+            end
+            Kernel.eval %Q{module ::OpenCV
             module Vector
                 class #{GeneratorRuby.normalize_type_name(@vector_type.name)}
                     def self.new
@@ -80,7 +91,7 @@ module Rbind
                     end
                 end
             end
-            end}|
+            end}$
         end
     end
 end
