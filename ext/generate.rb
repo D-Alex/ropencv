@@ -83,6 +83,9 @@ module Rbind
                     Enumerator.new(self)
                 end
             end
+            def <<(val)
+                push_back(val)
+            end
             Kernel.eval %Q{module ::OpenCV
             module Vector
                 class #{GeneratorRuby.normalize_type_name(@vector_type.name)}

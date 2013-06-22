@@ -39,31 +39,36 @@ module OpenCV
         end
         class Mat
             def self.to_native(obj,context)
-                return rbind_to_native(obj,context) if !obj.is_a? ::Array
-                h,w,e= if obj.first.is_a? Array
-                           [obj.size,obj.first.size,obj.first.first]
-                       else
-                           [obj.size,1,obj.first]
-                       end
-                setter,step,type = if e.is_a? Fixnum
-                                       [:put_array_of_uint8,w,CV_8UC1]
-                                   elsif e.is_a? Float
-                                       [:put_array_of_float64,8*w,CV_64FC1]
-                                   else
-                                       raise "cannot connvert arrays of #{e.class} to array"
-                                   end
-                ptr = FFI::MemoryPointer.new(:char,h*step)
-                if h == 1 || w == 1
-                    ptr.method(setter).call(0,obj)
-                else
-                    obj.each_with_index do |row,i|
-                        raise "number of row elements must be equal for each row" if row.size != w
-                        ptr.method(setter).call(i*step,row)
+                if obj.is_a?(VectorPoint2f)
+                    cv::Mat.new(obj.size,2,cv::CV_32FC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
+                elsif obj.is_a?(Array)
+                    h,w,e= if obj.first.is_a? Array
+                               [obj.size,obj.first.size,obj.first.first]
+                           else
+                               [obj.size,1,obj.first]
+                           end
+                    setter,step,type = if e.is_a? Fixnum
+                                           [:put_array_of_uint8,w,CV_8UC1]
+                                       elsif e.is_a? Float
+                                           [:put_array_of_float64,8*w,CV_64FC1]
+                                       else
+                                           raise "cannot connvert arrays of #{e.class} to array"
+                                       end
+                    ptr = FFI::MemoryPointer.new(:char,h*step)
+                    if h == 1 || w == 1
+                        ptr.method(setter).call(0,obj)
+                    else
+                        obj.each_with_index do |row,i|
+                            raise "number of row elements must be equal for each row" if row.size != w
+                            ptr.method(setter).call(i*step,row)
+                        end
                     end
+                    mat = Mat.new(h,w,type)
+                    LibC.memcpy(mat.data,ptr,h*step)
+                    mat.__obj_ptr__
+                else
+                    rbind_to_native(obj,context)
                 end
-                mat = Mat.new(h,w,type)
-                LibC.memcpy(mat.data,ptr,h*step)
-                mat.__obj_ptr__
             end
 
             def -(val)

@@ -33,6 +33,15 @@ const cv.CV_64FC1 (1-1)*8 + CV_64F
 const cv.CV_64FC2 (2-1)*8 + CV_64F
 const cv.CV_64FC3 (3-1)*8 + CV_64F
 const cv.CV_64FC4 (4-1)*8 + CV_64F
+const cv.CV_CN_MAX 512
+const cv.CV_CN_SHIFT 3
+const cv.CV_DEPTH_MAX (1 << CV_CN_SHIFT)
+const cv.CV_MAT_CN_MASK ((CV_CN_MAX - 1) << CV_CN_SHIFT)
+const cv.CV_MAT_TYPE_MASK (CV_DEPTH_MAX*CV_CN_MAX - 1)
+const cv.CV_MAT_CONT_FLAG_SHIFT 14
+const cv.CV_MAT_CONT_FLAG (1 << CV_MAT_CONT_FLAG_SHIFT)
+const cv.CV_SUBMAT_FLAG_SHIFT 15
+const cv.CV_SUBMAT_FLAG (1 << CV_SUBMAT_FLAG_SHIFT)
 class cv.Range
     int start /RW
     int end   /RW
@@ -362,6 +371,13 @@ cv.Mat.ptr uchar*
     int i0
     int i1
     int i2
+const cv.Mat.MAGIC_VAL 0x42FF0000
+const cv.Mat.AUTO_STEP 0
+const cv.Mat.CONTINUOUS_FLAG CV_MAT_CONT_FLAG
+const cv.Mat.SUBMATRIX_FLAG CV_SUBMAT_FLAG
+const cv.Mat.MAGIC_MASK 0xFFFF0000
+const cv.Mat.TYPE_MASK 0x00000FFF
+const cv.Mat.DEPTH_MASK 7
 class cv.RNG
     uint64 state
 cv.RNG.RNG
