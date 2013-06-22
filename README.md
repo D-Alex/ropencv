@@ -2,11 +2,14 @@
 This is the first draft for automated ffi ruby bindings using rbind for opencv 2.4.9 and higher
 
 # Installation 
-- you have to install opencv 2.4.9 or higher first
+You have to install opencv 2.4.9 or higher first. After this you can install the opencv ruby bindings via:
 - gem install ffi rbind
-- ruby generate.rb
+- mkdir build
+- cd build
+- cmake ..
+- make install
 
-# Example
+# Example1
 
     require 'opencv'
     include OpenCV
@@ -23,4 +26,34 @@ This is the first draft for automated ffi ruby bindings using rbind for opencv 2
 
     cv::draw_keypoints(mat,keypoints,mat)
     cv::imshow("key_points",mat)
+    cv::wait_key(-1)
+
+# Example2
+
+    require 'opencv'
+    include OpenCV
+
+    mat1 = cv::imread("image1.png")
+    mat2 = cv::imread("image2.png")
+
+    detector = cv::FeatureDetector::create("SURF")
+    extractor = cv::DescriptorExtractor::create("SURF")
+    matcher = cv::DescriptorMatcher::create("BruteForce")
+
+    features1 = Vector::KeyPoint.new
+    features2 = Vector::KeyPoint.new
+    detector.detect mat1,features1
+    detector.detect mat2,features2
+
+    descriptor1 = cv::Mat.new
+    descriptor2 = cv::Mat.new
+    extractor.compute(mat1,features1,descriptor1)
+    extractor.compute(mat2,features2,descriptor2)
+
+    matches = Vector::DMatch.new
+    matcher.match(descriptor1,descriptor2,matches)
+
+    result = cv::Mat.new
+    cv::draw_matches(mat_last,features1,mat,features2,matches,result)
+    cv::imshow("result",result)
     cv::wait_key(-1)
