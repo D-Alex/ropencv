@@ -71,6 +71,10 @@ module OpenCV
                 end
             end
 
+            def -@
+                cv::Mat.zeros(rows,cols,type)-self
+            end
+
             def -(val)
                 if val.is_a? Float
                     Rbind::cv_mat_operator_minus1( self, val)
