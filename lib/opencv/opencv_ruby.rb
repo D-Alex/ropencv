@@ -54,17 +54,17 @@ module OpenCV
                                        else
                                            raise "cannot connvert arrays of #{e.class} to array"
                                        end
-                    ptr = FFI::MemoryPointer.new(:char,h*step)
+                    mat = Mat.new(h,w,type)
+                    ptr = mat.data
+                    setter = ptr.method(setter)
                     if h == 1 || w == 1
-                        ptr.method(setter).call(0,obj)
+                        setter.call(0,obj)
                     else
                         obj.each_with_index do |row,i|
                             raise "number of row elements must be equal for each row" if row.size != w
-                            ptr.method(setter).call(i*step,row)
+                            setter.call(i*step,row)
                         end
                     end
-                    mat = Mat.new(h,w,type)
-                    LibC.memcpy(mat.data,ptr,h*step)
                     mat.__obj_ptr__
                 else
                     rbind_to_native(obj,context)
@@ -133,12 +133,7 @@ module OpenCV
             end
 
             def to_a
-                h = rows
-                w = cols
-                c = channels
-                s = step
-                ptr = FFI::MemoryPointer.new(:char,h*s)
-                LibC.memcpy(ptr,data,h*s)
+                h,w,c,s,ptr = [rows,cols,channels,step,data]
                 getter = case type & 7
                          when CV_8U
                              ptr.method(:get_array_of_uint8)
