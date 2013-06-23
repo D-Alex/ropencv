@@ -102,6 +102,33 @@ module OpenCV
                 end
             end
 
+            def coerce(other)
+                case other
+                when Float
+                    [other,to_f]
+                when Fixnum 
+                    [other,to_i]
+                else
+                    raise TypeError, "#{self.class} can't be coerced into #{other.class}"
+                end
+            end
+
+            def to_f
+                if rows == 1 && cols == 1
+                    at(0,0).to_f
+                else
+                    raise "Matrix #{self} has more than one element"
+                end
+            end
+
+            def to_i
+                if rows == 1 && cols == 1
+                    at(0,0).to_i
+                else
+                    raise "Matrix #{self} has more than one element"
+                end
+            end
+
             def set(i,j,val=nil)
                 i,j,val = if val == nil
                               if i.is_a?(Cv::Point)
@@ -139,9 +166,9 @@ module OpenCV
 
             def -(val)
                 if val.is_a? Float
-                    Rbind::cv_mat_operator_minus1( self, val)
-                elsif val.is_a? Fixnum
                     Rbind::cv_mat_operator_minus2( self, val)
+                elsif val.is_a? Fixnum
+                    Rbind::cv_mat_operator_minus3( self, val)
                 else
                     Rbind::cv_mat_operator_minus( self, val)
                 end
@@ -149,9 +176,9 @@ module OpenCV
 
             def +(val)
                 if val.is_a? Float
-                    Rbind::cv_mat_operator_plus1( self, val)
-                elsif val.is_a? Fixnum
                     Rbind::cv_mat_operator_plus2( self, val)
+                elsif val.is_a? Fixnum
+                    Rbind::cv_mat_operator_plus3( self, val)
                 else
                     Rbind::cv_mat_operator_plus( self, val)
                 end
@@ -159,9 +186,9 @@ module OpenCV
 
             def /(val)
                 if val.is_a? Float
-                    Rbind::cv_mat_operator_div1( self, val)
-                elsif val.is_a? Fixnum
                     Rbind::cv_mat_operator_div2( self, val)
+                elsif val.is_a? Fixnum
+                    Rbind::cv_mat_operator_div3( self, val)
                 else
                     Rbind::cv_mat_operator_div( self, val)
                 end
@@ -169,9 +196,9 @@ module OpenCV
 
             def *(val)
                 if val.is_a? Float
-                    Rbind::cv_mat_operator_mult1( self, val)
-                elsif val.is_a? Fixnum
                     Rbind::cv_mat_operator_mult2( self, val)
+                elsif val.is_a? Fixnum
+                    Rbind::cv_mat_operator_mult3( self, val)
                 else
                     Rbind::cv_mat_operator_mult( self, val)
                 end
@@ -195,7 +222,7 @@ module OpenCV
                     end.join(" ")
                     "|#{str}|"
                 end.join("\n")
-                pp.text str
+                    pp.text str
             end
 
             def to_a
