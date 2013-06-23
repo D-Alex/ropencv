@@ -75,6 +75,68 @@ module OpenCV
                 cv::Mat.zeros(rows,cols,type)-self
             end
 
+            def at(i,j=nil)
+                i,j = if j == nil
+                          if i.is_a?(Cv::Point)
+                              [i.y,i.x]
+                          elsif rows == 1
+                              [0,i]
+                          else
+                              [i,0]
+                          end
+                      else
+                          [i,j]
+                      end
+                if i >= rows || i < 0 || j >= cols || j <0
+                    raise ArgumentError,"out of bound #{i}/#{j}"
+                end
+                case type & 7
+                when CV_8U
+                    data.get_uint8(i*step+j)
+                when CV_32F
+                    data.get_float32(i*step+j*4)
+                when CV_64F
+                    data.get_float64(i*step+j*8)
+                else
+                    raise "cannot connvert #{self.class} to ruby"
+                end
+            end
+
+            def set(i,j,val=nil)
+                i,j,val = if val == nil
+                              if i.is_a?(Cv::Point)
+                                  [i.y,i.x,j]
+                              elsif rows == 1
+                                  [0,i,j]
+                              else
+                                  [i,0,j]
+                              end
+                          else
+                              [i,j,val]
+                          end
+                if i >= rows || i < 0 || j >= cols || j <0
+                    raise ArgumentError,"out of bound #{i}/#{j}"
+                end
+                case type & 7
+                when CV_8U
+                    data.put_uint8(i*step+j,val)
+                when CV_32F
+                    data.put_float32(i*step+j*4,val)
+                when CV_64F
+                    data.put_float64(i*step+j*8,val)
+                else
+                    raise "cannot connvert #{self.class} to ruby"
+                end
+            end
+
+            def [](i,j=nil)
+                at(i,j)
+            end
+
+            def []=(i,j,val=nil)
+                set(i,j,val)
+            end
+
             def -(val)
                 if val.is_a? Float
                     Rbind::cv_mat_operator_minus1( self, val)
