@@ -371,6 +371,8 @@ cv.Mat.ptr uchar*
     int i0
     int i1
     int i2
+cv.Mat.operator () Mat =block
+    Rect rect
 const cv.Mat.MAGIC_VAL 0x42FF0000
 const cv.Mat.AUTO_STEP 0
 const cv.Mat.CONTINUOUS_FLAG CV_MAT_CONT_FLAG
