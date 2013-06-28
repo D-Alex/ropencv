@@ -83,6 +83,7 @@ cv.String.compare int
 cv.String.swap void
     String str /IO
 class cv.Scalar
+    double* val
 cv.Scalar.Scalar
 cv.Scalar.Scalar
     double v0
@@ -98,6 +99,8 @@ cv.Scalar.mul Scalar
     double scale 1
 cv.Scalar.conj Scalar
 cv.Scalar.isReal bool
+cv.Scalar.operator[] double
+    size_t elem
 class cv.Point
     int x /RW
     int y /RW

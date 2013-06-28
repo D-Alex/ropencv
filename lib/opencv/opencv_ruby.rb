@@ -21,6 +21,15 @@ module OpenCV
                 c_str
             end
         end
+
+        class Scalar
+            def []=(i,value=nil)
+                raise "out of bound #{value}" if value < 0 || value > 3
+                val.put_float64(i*8,value)
+                value
+            end
+        end
+
         class Mat
             def self.to_native(obj,context)
                 if obj.is_a?(VectorPoint2f)
