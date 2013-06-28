@@ -34,6 +34,8 @@ module OpenCV
             def self.to_native(obj,context)
                 if obj.is_a?(VectorPoint2f)
                     cv::Mat.new(obj.size,2,cv::CV_32FC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
+                elsif obj.is_a?(VectorPoint3f)
+                    cv::Mat.new(obj.size,3,cv::CV_32FC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Array)
                     h,w,e= if obj.first.is_a? Array
                                [obj.size,obj.first.size,obj.first.first]

@@ -111,6 +111,7 @@ rbind.on_type_not_found do |owner,type|
     end
 end
 
+
 rbind.parse File.join(File.dirname(__FILE__),"opencv.txt")
 rbind.use_namespace rbind.cv
 rbind.parse_headers
@@ -128,6 +129,9 @@ rbind.cv.putText.parameter(0).add_flag(:IO)
 rbind.cv.chamerMatching.parameter(0).add_flag(:IO)
 rbind.cv.chamerMatching.parameter(1).add_flag(:IO)
 rbind.cv.chamerMatching.parameter(2).add_flag(:IO)
+
+rbind.parser.find_type(rbind,"vector_Point3f")
+rbind.parser.find_type(rbind,"vector_Point3d")
 
 rbind.generator_ruby.file_prefix = "opencv"
 rbind.generate(File.join(File.dirname(__FILE__),"src"),File.join(File.dirname(__FILE__),"..","lib","opencv"))

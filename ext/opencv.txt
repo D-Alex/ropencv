@@ -156,6 +156,42 @@ cv.Point2d.dot double
     Point2d pt
 cv.Point2d.cross double
     Point2d pt
+class cv.Point3f
+    float x /RW
+    float y /RW
+    float z /RW
+cv.Point3f.Point3f
+    float x
+    float y
+    float z
+cv.Point3f.Point3f
+    Point3f pt
+cv.Point3f.dot float
+    Point3f pt
+cv.Point3f.ddot double
+    Point3f pt
+cv.Point3f.cross Point3f
+    Point3f pt
+cv.Point3f.operator+ void
+    Point3f pt
+class cv.Point3d
+    double x /RW
+    double y /RW
+    double z /RW
+cv.Point3d.Point3d
+    double x
+    double y
+    double z
+cv.Point3d.Point3d
+    Point3d pt
+cv.Point3d.dot double
+    Point3d pt
+cv.Point3d.ddot double
+    Point3d pt
+cv.Point3d.cross Point3d
+    Point3d pt
+cv.Point3d.operator+ void
+    Point3d pt
 class cv.Size
     int width  /RW
     int height /RW
