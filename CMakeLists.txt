@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
+SET(CMAKE_INSTALL TRUE)
 add_subdirectory(ext)
-
 FIND_PACKAGE(Ruby)
 IF(NOT RUBY_INCLUDE_PATH)
     MESSAGE(STATUS "Ruby library not found. Cannot install OpenCV ruby extensions")
@@ -11,9 +11,9 @@ ELSEIF(NOT RUBY_EXTENSIONS_AVAILABLE)
     FIND_PROGRAM(RDOC_EXECUTABLE NAMES rdoc1.9 rdoc1.8 rdoc)
     FIND_PROGRAM(YARD_EXECUTABLE NAMES yard)
 
-    INSTALL(FILES lib/opencv.rb
+    INSTALL(FILES lib/ropencv.rb
         DESTINATION ${RUBY_LIBRARY_INSTALL_DIR})
-    INSTALL(DIRECTORY lib/opencv
+    INSTALL(DIRECTORY lib/ropencv
         DESTINATION ${RUBY_LIBRARY_INSTALL_DIR})
 ENDIF(NOT RUBY_INCLUDE_PATH)
 

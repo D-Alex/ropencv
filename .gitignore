@@ -1,1 +1,12 @@
 build/*
+ext/CMakeFiles
+ext/CMakeCache.txt
+ext/Makefile
+ext/*.rbind
+ext/*.h
+ext/*.hpp
+ext/*.cc
+lib/ropencv/ropencv.rb
+lib/ropencv/ropencv_types.rb
+lib/ropencv/ropencv_types.so
+
