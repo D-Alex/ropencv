@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
-PROJECT(rbind_opencv CXX)
 
-add_subdirectory(ext/src)
+add_subdirectory(ext)
 
 FIND_PACKAGE(Ruby)
 IF(NOT RUBY_INCLUDE_PATH)

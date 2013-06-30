@@ -1,24 +1,19 @@
-# ffi ruby wrapper for opencv 2.4.9 and higher
-This is the first draft for automated ffi ruby bindings using rbind for opencv 2.4.9 and higher
+# ffi ruby wrapper for opencv 2.4.4 and 2.4.9
+This is the first draft for automated ffi ruby bindings using rbind for opencv 2.4.4 and 2.4.9
 
 # Installation 
-You have to install opencv 2.4.9 or higher first. After this you can install the opencv ruby bindings via:
-- gem install ffi rbind
-- mkdir build
-- cd build
-- cmake ..
-- make install
+You have to install opencv 2.4.4 or 2.4.9 first. After this you can install the opencv ruby bindings via:
+- gem install ropencv
 
 # Additional methods 
 The following methods not available for python or java are automatically wrapped by this package:
 - drawMatches
-- findEssentialMat
-- recoverPose
-
+- findEssentialMat (OpenCV 2.4.9)
+- recoverPose (OpenCV 2.4.9)
 
 # Example1
 
-    require 'opencv'
+    require 'ropencv'
     include OpenCV
 
     mat = cv::imread("logo.png")
@@ -37,7 +32,7 @@ The following methods not available for python or java are automatically wrapped
 
 # Example2
 
-    require 'opencv'
+    require 'ropencv'
     include OpenCV
 
     mat1 = cv::imread("image1.png")

@@ -103,6 +103,11 @@ rbind.parser.find_type(rbind,"vector_Point3f")
 rbind.parser.find_type(rbind,"vector_Point3d")
 
 # generate files
-rbind.generator_ruby.file_prefix = "opencv"
-rbind.generate(File.join(File.dirname(__FILE__),"src"),File.join(File.dirname(__FILE__),"..","lib","opencv"))
-#rbind.build
+rbind.generator_ruby.file_prefix = "ropencv"
+rbind.generate(File.join(File.dirname(__FILE__)),File.join(File.dirname(__FILE__),"..","lib","ropencv"))
+
+Dir.chdir(rbind.generator_c.output_path) do
+    if !system("cmake .")
+        raise "CMake Configure Error"
+    end
+end
