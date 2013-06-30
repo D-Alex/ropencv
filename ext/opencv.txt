@@ -73,8 +73,6 @@ cv.String.size size_t
 cv.String.length size_t
 cv.String.operator[] char
     size_t idx
-cv.String.begin const_c_string
-cv.String.end const_c_string
 cv.String.c_str const_c_string
 cv.String.empty bool
 cv.String.clear void

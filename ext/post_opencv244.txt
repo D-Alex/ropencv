@@ -1,0 +1,13 @@
+cv.drawMatches void 
+    Mat img1 
+    vector_KeyPoint keypoints1 
+    Mat img2 
+    vector_KeyPoint keypoints2 
+    vector_DMatch matches1to2 
+    Mat outImg /O
+    Scalar matchColor Scalar::all(-1)
+    Scalar singlePointColor Scalar::all(-1)
+    vector_char matchesMask std::vector<char>()
+    int flags DrawMatchesFlags::DEFAULT
+cv.morphologyDefaultBorderValue Scalar
+
