@@ -1,12 +1,29 @@
-# ffi ruby wrapper for opencv 2.4.4 and 2.4.9
-This is the first draft for automated ffi ruby bindings using rbind for opencv 2.4.4 and 2.4.9
+# ffi ruby wrapper for OpenCV 
+This are automated ffi ruby wrappers for opencv 2.4.4 and higher. For wrapping
+all marked OpenCV C++ methods the OpenCV hdr parser is used to parse the OpenCV
+header files. From there rbind generates a C interface and ruby classes. The
+ruby classes are using the C interface via ffi to give the user the same object
+oriented experience on the ruby side like he has on the c++ side.
+
+## State:
+- All marked methods in the OpenCV C++ header are wrapped
+- Most of the OpenCV types have conversion function from and to ruby types
+- Some convenient methods are still missing
+- Memory management needs review
+- Currently, no support for multi threading
+
+## Supported OpenCV versions:
+- 2.4.4
+- 2.4.5
+- 2.4.6
+- 2.4.9
 
 # Installation 
-You have to install opencv 2.4.4 or 2.4.9 first. After this you can install the opencv ruby bindings via:
+You have to install opencv 2.4.4 - 2.4.6 or 2.4.9 first. After this you can install the opencv ruby bindings via:
 - gem install ropencv
 
 # Additional methods 
-The following methods not available for python or java are automatically wrapped by this package:
+The following methods are available in ruby despite the fact they are not marked to be exported in the c++ headers:
 - drawMatches
 - findEssentialMat (OpenCV 2.4.9)
 - recoverPose (OpenCV 2.4.9)
