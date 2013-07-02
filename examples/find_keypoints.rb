@@ -1,4 +1,4 @@
-require './../lib/opencv'
+require 'ropencv'
 include OpenCV
 
 mat = cv::imread("logo.png")

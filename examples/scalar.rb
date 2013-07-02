@@ -1,4 +1,4 @@
-require 'opencv'
+require 'ropencv'
 include OpenCV
 
 scalar = cv::Scalar.new(1,0,0,0)
