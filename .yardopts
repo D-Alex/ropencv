@@ -1,2 +1,2 @@
 --exclude ext/
-doc/**/*.rb
+lib/ruby/ropencv/*.rb
