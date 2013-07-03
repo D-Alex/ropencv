@@ -1,2 +1,2 @@
---exclude /ext/
+--exclude ext/
 doc/**/*.rb
