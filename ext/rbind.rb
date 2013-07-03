@@ -17,7 +17,7 @@ out = IO.popen("pkg-config --modversion opencv")
 opencv_version = out.read.chomp
 
 ##add opencv headers
-if opencv_version == "2.4.4"
+if opencv_version >= "2.4.4" && opencv_version <= "2.4.6"
     rbind.includes =   ["opencv2/core/core_c.h", "opencv2/core/types_c.h",
                         "opencv2/core/core.hpp", "opencv2/flann/miniflann.hpp",
                         "opencv2/imgproc/imgproc_c.h", "opencv2/imgproc/types_c.h",
@@ -78,15 +78,13 @@ rbind.parse_headers
 rbind.parse File.join(File.dirname(__FILE__),"post_opencv244.txt")
 
 # post parsing + patching wrong signatures
-if opencv_version == "2.4.4"
-    rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(2).add_flag(:IO)
-    rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(3).add_flag(:IO)
-elsif opencv_version >= "2.4.9"
+if opencv_version >= "2.4.9"
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
     rbind.cv.randShuffle.parameter(2).add_flag(:IO)
-else
-    raise "not supported opencv version"
 end
+
+rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(2).add_flag(:IO)
+rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(3).add_flag(:IO)
 
 rbind.cv.BRISK.generateKernel.parameter(0).add_flag(:IO)
 rbind.cv.BRISK.generateKernel.parameter(1).add_flag(:IO)
