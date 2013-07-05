@@ -11,3 +11,4 @@ lib/ruby/ropencv/ropencv_types.rb
 lib/lib
 lib/include
 *.gem
+doc/*

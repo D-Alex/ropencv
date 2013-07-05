@@ -355,6 +355,8 @@ cv.Mat.cross Mat
     Mat m
 cv.Mat.dot double
     Mat m
+cv.Mat.diag Mat /S
+    Mat d
 cv.Mat.zeros Mat /S
     int rows
     int cols
