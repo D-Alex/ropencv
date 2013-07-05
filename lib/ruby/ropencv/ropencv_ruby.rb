@@ -31,6 +31,19 @@ module OpenCV
         end
 
         class Mat
+            class << self
+                alias :rbind_new :new
+
+                def new(*args)
+                    # allow Mat.new([123,23],[2332,32])
+                    if !args.find{|a| !a.is_a?(Array)} && args.size() > 1
+                        rbind_new(args)
+                    else
+                        rbind_new(*args)
+                    end
+                end
+            end
+
             def self.to_native(obj,context)
                 if obj.is_a?(VectorPoint2f)
                     cv::Mat.new(obj.size,2,cv::CV_32FC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
