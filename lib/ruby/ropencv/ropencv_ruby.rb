@@ -30,6 +30,61 @@ module OpenCV
             end
         end
 
+        class Vec2d
+            def [](i)
+                raise "Out of bound #{i}" if i < 0 || i > 1 
+                val.get_float64(i*8)
+            end
+            def []=(i,val0)
+                raise "Out of bound #{i}" if i < 0 || i > 1 
+                val.put_float64(i*8,val0)
+            end
+        end
+
+        class Vec3d
+            def [](i)
+                raise "Out of bound #{i}" if i < 0 || i > 2
+                val.get_float64(i*8)
+            end
+            def []=(i,val0)
+                raise "Out of bound #{i}" if i < 0 || i > 2
+                val.put_float64(i*8,val0)
+            end
+        end
+
+        class Vec4d
+            def [](i)
+                raise "Out of bound #{i}" if i < 0 || i > 3
+                val.get_float64(i*8)
+            end
+            def []=(i,val0)
+                raise "Out of bound #{i}" if i < 0 || i > 3
+                val.put_float64(i*8,val0)
+            end
+        end
+
+        class Vec4f
+            def [](i)
+                raise "Out of bound #{i}" if i < 0 || i > 3
+                val.get_float32(i*4)
+            end
+            def []=(i,val0)
+                raise "Out of bound #{i}" if i < 0 || i > 3
+                val.put_float32(i*4,val0)
+            end
+        end
+        
+        class Vec6f
+            def [](i)
+                raise "Out of bound #{i}" if i < 0 || i > 5
+                val.get_float32(i*4)
+            end
+            def []=(i,val0)
+                raise "Out of bound #{i}" if i < 0 || i > 5
+                val.put_float32(i*4,val0)
+            end
+        end
+
         class Mat
             class << self
                 alias :rbind_new :new
