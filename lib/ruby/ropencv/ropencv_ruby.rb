@@ -274,12 +274,7 @@ module OpenCV
                          else
                              '%6.3f'
                          end
-                a = if cols == 1 || rows == 1
-                        [to_a]
-                    else
-                        to_a
-                    end
-                str = a.map do |r|
+                str = to_a.map do |r|
                     str = r.map do |e|
                         sprintf(format,e)
                     end.join(" ")
@@ -300,15 +295,11 @@ module OpenCV
                          else
                              raise "cannot connvert #{self.class} to array"
                          end
-                if w  == 1 || h == 1
-                    getter.call(0,total)
-                else
-                    result = []
-                    0.upto(h-1) do |i|
-                        result << getter.call(s*i,w*c)
-                    end
-                    result
+                result = []
+                0.upto(h-1) do |i|
+                    result << getter.call(s*i,w*c)
                 end
+                result
             end
         end
     end
