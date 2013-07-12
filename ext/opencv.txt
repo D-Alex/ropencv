@@ -1,3 +1,4 @@
+const cv.INT_MAX 2147483647
 const cv.CV_8U 0
 const cv.CV_8S 1
 const cv.CV_16U 2
@@ -108,6 +109,7 @@ class cv.Rect
     int width /RW
     int height /RW
 cv.Point.Point
+cv.Point.Point
     int x
     int y
 cv.Point.Point
@@ -126,6 +128,7 @@ class cv.Point2f
     float x /RW
     float y /RW
 cv.Point2f.Point2f
+cv.Point2f.Point2f
     float x
     float y
 cv.Point2f.Point2f
@@ -141,6 +144,7 @@ cv.Point2f.operator+ void
 class cv.Point2d
     double x /RW
     double y /RW
+cv.Point2d.Point2d
 cv.Point2d.Point2d
     double x
     double y
@@ -159,6 +163,7 @@ class cv.Point3f
     float y /RW
     float z /RW
 cv.Point3f.Point3f
+cv.Point3f.Point3f
     float x
     float y
     float z
@@ -176,6 +181,7 @@ class cv.Point3d
     double x /RW
     double y /RW
     double z /RW
+cv.Point3d.Point3d
 cv.Point3d.Point3d
     double x
     double y
