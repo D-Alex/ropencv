@@ -7,6 +7,26 @@ module OpenCV
         end
     end
 
+    class VectorMat
+        def self.to_native(obj,context)
+            if obj.is_a?(VectorVectorPoint2f)
+                t = VectorMat.new
+                obj.each do |e|
+                    t << cv::Mat.new(e.size,2,cv::CV_32FC1,e.data,cv::Mat::AUTO_STEP)
+                end
+                t.__obj_ptr__
+            elsif obj.is_a?(VectorVectorPoint)
+                t = VectorMat.new
+                obj.each do |e|
+                    t << cv::Mat.new(e.size,2,cv::CV_32SC1,e.data,cv::Mat::AUTO_STEP)
+                end
+                t.__obj_ptr__
+            else
+                rbind_to_native(obj,context)
+            end
+        end
+    end
+
     module Cv
         class String
             def self.to_native(obj,context)
