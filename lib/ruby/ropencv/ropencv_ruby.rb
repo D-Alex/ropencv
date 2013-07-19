@@ -28,6 +28,17 @@ module OpenCV
     end
 
     module Cv
+        class Size
+            def *(val)
+                Size.new(width*val,height*val)
+            end
+            def +(val)
+                Size.new(width+val,height+val)
+            end
+            def -(val)
+                Size.new(width-val,height-val)
+            end
+        end
         class String
             def self.to_native(obj,context)
                 if obj.is_a? ::String
