@@ -329,6 +329,7 @@ cv.Vec4d.operator/ Vec4d
     double val
 class cv.Vec4f
 cv.Vec4f.Vec4f
+cv.Vec4f.Vec4f
     float* val
 cv.Vec4f.Vec4f
     Vec4f vec
@@ -353,7 +354,35 @@ cv.Vec4f.operator* Vec4f
     float val
 cv.Vec4f.operator/ Vec4f
     float val
+class cv.Vec4i
+cv.Vec4i.Vec4i
+cv.Vec4i.Vec4i
+    int* val
+cv.Vec4i.Vec4i
+    Vec4i vec
+cv.Vec4i.Vec4i
+    int t1
+    int t2
+    int t3
+    int t4
+cv.Vec4i.all Vec4i /S
+    int alpha
+cv.Vec4i.mul Vec4i
+    Vec4i other
+cv.Vec4i.operator== bool
+    Vec4i vec
+cv.Vec4i.operator!= bool
+    Vec4i vec
+cv.Vec4i.operator+ Vec4i
+    Vec4i vec
+cv.Vec4i.operator- Vec4i
+    Vec4i vec
+cv.Vec4i.operator* Vec4i
+    int val
+cv.Vec4i.operator/ Vec4i
+    int val
 class cv.Vec6f
+cv.Vec6f.Vec6f
 cv.Vec6f.Vec6f
     float* val
 cv.Vec6f.Vec6f
