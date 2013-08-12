@@ -1,6 +1,6 @@
 require 'rbind'
 require 'pp'
-require File.join(File.dirname(__FILE__),'helper.rb')
+require File.join(".",File.dirname(__FILE__),'helper.rb')
 opencv_version,opencv_headers = find_opencv
 
 rbind = Rbind::Rbind.new("OpenCV")

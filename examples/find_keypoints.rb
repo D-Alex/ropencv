@@ -5,7 +5,7 @@ mat = cv::imread("logo.png")
 cv.blur(mat,mat,cv::Size.new(10,10))
 
 detector = cv::FeatureDetector::create("SURF")
-keypoints = Vector::KeyPoint.new
+keypoints = Vector.new(cv::KeyPoint)
 detector.detect(mat,keypoints)
 
 puts "found #{keypoints.size} keypoints"
