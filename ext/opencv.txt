@@ -124,6 +124,10 @@ cv.Point.inside bool
     Rect rect
 cv.Point.operator+ void
     Point pt
+cv.Point.operator== bool
+    Point pt
+cv.Point.operator!= bool
+    Point pt
 class cv.Point2f
     float x /RW
     float y /RW
@@ -141,6 +145,10 @@ cv.Point2f.cross double
     Point2f pt
 cv.Point2f.operator+ void
     Point2f pt
+cv.Point2f.operator== bool
+    Point2f pt
+cv.Point2f.operator!= bool
+    Point2f pt
 class cv.Point2d
     double x /RW
     double y /RW
@@ -157,6 +165,10 @@ cv.Point2d.dot double
 cv.Point2d.dot double
     Point2d pt
 cv.Point2d.cross double
+    Point2d pt
+cv.Point2d.operator== bool
+    Point2d pt
+cv.Point2d.operator!= bool
     Point2d pt
 class cv.Point3f
     float x /RW
@@ -177,6 +189,10 @@ cv.Point3f.cross Point3f
     Point3f pt
 cv.Point3f.operator+ void
     Point3f pt
+cv.Point3f.operator== bool
+    Point3f pt
+cv.Point3f.operator!= bool
+    Point3f pt
 class cv.Point3d
     double x /RW
     double y /RW
@@ -195,6 +211,10 @@ cv.Point3d.ddot double
 cv.Point3d.cross Point3d
     Point3d pt
 cv.Point3d.operator+ void
+    Point3d pt
+cv.Point3d.operator== bool
+    Point3d pt
+cv.Point3d.operator!= bool
     Point3d pt
 class cv.Size
     int width  /RW
