@@ -12,6 +12,14 @@ rbind.parser.type_alias["const_c_string"] = rbind.c_string.to_const
 rbind.add_std_types
 rbind.parser.add_type OpenCVPtr.new
 
+# add Vec types
+2.upto(6) do |idx|
+    next if idx == 5
+    rbind.parser.add_type Vec.new("cv::Vec#{idx}d",rbind.double,idx)
+    rbind.parser.add_type Vec.new("cv::Vec#{idx}f",rbind.float,idx)
+    rbind.parser.add_type Vec.new("cv::Vec#{idx}i",rbind.int,idx)
+end
+
 # parsing
 rbind.parse File.join(File.dirname(__FILE__),"pre_opencv244.txt")
 rbind.parse File.join(File.dirname(__FILE__),"opencv.txt")

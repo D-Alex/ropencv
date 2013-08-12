@@ -64,79 +64,65 @@ module OpenCV
             end
         end
 
-        class Scalar
-            def []=(i,value=nil)
-                raise "out of bound #{value}" if value < 0 || value > 3
-                val.put_float64(i*8,value)
-                value
-            end
-        end
-
-        class Vec2d
+        module Vecxd
             def [](i)
-                raise "Out of bound #{i}" if i < 0 || i > 1 
+                raise "Out of bound #{i}" if i < 0 || i >= self.class::SIZE
                 val.get_float64(i*8)
             end
             def []=(i,val0)
-                raise "Out of bound #{i}" if i < 0 || i > 1 
+                raise "Out of bound #{i}" if i < 0 || i >= self.class::SIZE
                 val.put_float64(i*8,val0)
             end
-        end
-
-        class Vec3d
-            def [](i)
-                raise "Out of bound #{i}" if i < 0 || i > 2
-                val.get_float64(i*8)
-            end
-            def []=(i,val0)
-                raise "Out of bound #{i}" if i < 0 || i > 2
-                val.put_float64(i*8,val0)
+            def to_a
+                val.get_array_of_float64(0,self.class::SIZE)
             end
         end
 
-        class Vec4d
+        module Vecxf
             def [](i)
-                raise "Out of bound #{i}" if i < 0 || i > 3
-                val.get_float64(i*8)
-            end
-            def []=(i,val0)
-                raise "Out of bound #{i}" if i < 0 || i > 3
-                val.put_float64(i*8,val0)
-            end
-        end
-
-        class Vec4i
-            def [](i)
-                raise "Out of bound #{i}" if i < 0 || i > 3
-                val.get_int(i*FFI::Pointer.size)
-            end
-            def []=(i,val0)
-                raise "Out of bound #{i}" if i < 0 || i > 3
-                val.put_int(i*FFI::Pointer.size,val0)
-            end
-        end
-
-        class Vec4f
-            def [](i)
-                raise "Out of bound #{i}" if i < 0 || i > 3
+                raise "Out of bound #{i}" if i < 0 || i >= self.class::SIZE
                 val.get_float32(i*4)
             end
             def []=(i,val0)
-                raise "Out of bound #{i}" if i < 0 || i > 3
+                raise "Out of bound #{i}" if i < 0 || i >= self.class::SIZE
                 val.put_float32(i*4,val0)
             end
+            def to_a
+                val.get_array_of_float32(0,self.class::SIZE)
+            end
         end
-        
-        class Vec6f
+
+        module Vecxi
             def [](i)
-                raise "Out of bound #{i}" if i < 0 || i > 5
-                val.get_float32(i*4)
+                raise "Out of bound #{i}" if i < 0 || i >= self.class::SIZE
+                val.get_int(i*FFI.type_size(FFI::Type::INT))
             end
             def []=(i,val0)
-                raise "Out of bound #{i}" if i < 0 || i > 5
-                val.put_float32(i*4,val0)
+                raise "Out of bound #{i}" if i < 0 || i >= self.class::SIZE
+                val.put_int(i*FFI.type_size(FFI::Type::INT),val0)
+            end
+            def to_a
+                val.get_array_of_int(0,self.class::SIZE)
             end
         end
+
+        class Vec2d;include Vecxd; SIZE=2;end
+        class Vec2f;include Vecxf; SIZE=2;end
+        class Vec2i;include Vecxi; SIZE=2;end
+
+        class Vec3d;include Vecxd; SIZE=3;end
+        class Vec3f;include Vecxf; SIZE=3;end
+        class Vec3i;include Vecxi; SIZE=3;end
+
+        class Vec4d;include Vecxd; SIZE=4;end
+        class Vec4f;include Vecxf; SIZE=4;end
+        class Vec4i;include Vecxi; SIZE=4;end
+
+        class Vec6d;include Vecxd; SIZE=6;end
+        class Vec6f;include Vecxf; SIZE=6;end
+        class Vec6i;include Vecxi; SIZE=6;end
+
+        class Scalar; include Vecxd; SIZE=4;end
 
         class Mat
             class << self
@@ -153,7 +139,9 @@ module OpenCV
             end
 
             def self.to_native(obj,context)
-                if obj.is_a?(Std::Vector::Cv_Point2f)
+                if obj.is_a?(Std::Vector::Cv_Point)
+                    cv::Mat.new(obj.size,2,cv::CV_32SC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
+                elsif obj.is_a?(Std::Vector::Cv_Point2f)
                     cv::Mat.new(obj.size,2,cv::CV_32FC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Cv_Point3f)
                     cv::Mat.new(obj.size,3,cv::CV_32FC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
