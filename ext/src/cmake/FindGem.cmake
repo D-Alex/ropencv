@@ -111,10 +111,10 @@ foreach(Gem_NAME ${Gem_FIND_COMPONENTS})
             endforeach()
 
             # Compact the lists
-            if(${GEM_LIBRARIES})
+            if(DEFINED GEM_LIBRARIES)
                 LIST(REMOVE_DUPLICATES GEM_LIBRARIES)
             endif()
-            if(${GEM_INCLUDE_DIRS})
+            if(DEFINED GEM_INCLUDE_DIRS)
                 LIST(REMOVE_DUPLICATES GEM_INCLUDE_DIRS)
             endif()
         endif()

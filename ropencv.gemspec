@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
                           'ruby classes are using the C interface via ffi to give the user the same object '\
                           'oriented experience on the ruby side like he has on the c++ side.'
     s.files             = `git ls-files`.split("\n") + ["lib/ruby/ropencv/ropencv_types.rb","lib/ruby/ropencv/ropencv_ruby.rb"]
-    s.require_path      = 'lib/ruby'
+    s.require_path      = 'lib'
     s.required_rubygems_version = ">= 1.3.6"
     s.add_runtime_dependency "rbind", "~> 0.0.10"
     s.add_runtime_dependency "ffi", "~> 1.9.0"

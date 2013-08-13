@@ -55,5 +55,5 @@ rbind.parser.type("std::vector<Vec4i>")
 
 # generate files
 rbind.generator_ruby.file_prefix = "ropencv"
-rbind.generate(File.join(File.dirname(__FILE__),"src"),File.join(File.dirname(__FILE__),"..","lib","ruby","ropencv"))
+rbind.generate(File.join(File.dirname(__FILE__),"src"),File.join(File.dirname(__FILE__),"..","lib","ropencv"))
 

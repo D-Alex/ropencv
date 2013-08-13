@@ -22,15 +22,14 @@ ADD_LIBRARY(rbind_opencv SHARED ${RBIND_SRC})
 TARGET_LINK_LIBRARIES(rbind_opencv ${OPENCV_LIBS} ${OPENCV_LDFLAGS}  ${GEM_LIBRARIES})
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/rbind.pc.in ${CMAKE_CURRENT_BINARY_DIR}/rbind_opencv.pc @ONLY)
-set(ROOT_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 
-# global install
+set(ROOT_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 if(GEM_INSTALL)
     # local install
-    install(TARGETS rbind_opencv LIBRARY DESTINATION ${ROOT_FOLDER}/lib/lib)
-    install(FILES types.h operations.h conversions.hpp DESTINATION ${ROOT_FOLDER}/lib/include)
-    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/extern.rbind DESTINATION ${ROOT_FOLDER}/lib/include)
-    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/config.rbind DESTINATION ${ROOT_FOLDER}/lib/include)
+    install(TARGETS rbind_opencv LIBRARY DESTINATION ${ROOT_FOLDER}/lib)
+    install(FILES types.h operations.h conversions.hpp DESTINATION ${ROOT_FOLDER}/include)
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/extern.rbind DESTINATION ${ROOT_FOLDER}/include)
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/config.rbind DESTINATION ${ROOT_FOLDER}/include)
 else()
     # global install
     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/rbind_opencv.pc DESTINATION lib/pkgconfig)
@@ -42,7 +41,7 @@ else()
     FIND_PACKAGE(Ruby)
     IF(NOT RUBY_INCLUDE_PATH)
         MESSAGE(STATUS "Ruby library not found. Cannot install ruby extensions")
-    ELSEIF(NOT RUBY_EXTENSIONS_AVAILABLE)
+    ELSEIF(RUBY_EXTENSIONS_AVAILABLE)
         STRING(REGEX REPLACE ".*lib(32|64)?/?" "lib/" RUBY_LIBRARY_INSTALL_DIR ${RUBY_RUBY_LIB_PATH})
         INSTALL(DIRECTORY ${ROOT_FOLDER}/lib/ruby/ DESTINATION ${RUBY_LIBRARY_INSTALL_DIR}
             FILES_MATCHING PATTERN "*.rb")
