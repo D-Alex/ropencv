@@ -64,7 +64,7 @@ def find_opencv
     opencv_version = out.read.chomp
 
     ##add opencv headers
-    headers = if opencv_version >= "2.4.4" && opencv_version <= "2.4.6"
+    headers = if opencv_version >= "2.4.4" && opencv_version <= "2.4.6.1"
                   ["opencv2/core/core_c.h", "opencv2/core/types_c.h",
                       "opencv2/core/core.hpp", "opencv2/flann/miniflann.hpp",
                       "opencv2/imgproc/imgproc_c.h", "opencv2/imgproc/types_c.h",
