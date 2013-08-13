@@ -2,7 +2,7 @@ require 'rbind'
 require 'pp'
 require 'yaml'
 
-require File.join(".",File.dirname(__FILE__),'helper.rb')
+require File.join(File.dirname(__FILE__),'helper.rb')
 opencv_version,opencv_headers = find_opencv
 
 rbind = Rbind::Rbind.new("OpenCV")
@@ -11,7 +11,11 @@ rbind.includes = opencv_headers
 
 # add some templates and alias
 rbind.parser.type_alias["const_c_string"] = rbind.c_string.to_const
-rbind.add_std_types
+if opencv_version >= "2.4.9"
+    rbind.add_std_types
+else
+    rbind.add_std_vector
+end
 rbind.parser.add_type OpenCVPtr.new
 
 # add Vec types
