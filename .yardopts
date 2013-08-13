@@ -1,2 +1,5 @@
---exclude ext/
-lib/ruby/ropencv/*.rb
+--exclude ext
+--markup markdown
+--no-private
+lib/ropencv/*.rb
+

@@ -1,5 +1,5 @@
-# ffi ruby wrapper for OpenCV 
-This are automated ffi ruby wrappers for opencv 2.4.4 and higher. For wrapping
+# ffi ruby bindings for OpenCV 
+Automated ffi ruby bindings for OpenCV 2.4.4 and higher. For wrapping
 all marked OpenCV C++ methods the OpenCV hdr parser is used to parse the OpenCV
 header files. From there rbind generates a C interface and ruby classes. The
 ruby classes are using the C interface via ffi to give the user the same object
@@ -7,10 +7,8 @@ oriented experience on the ruby side like he has on the c++ side.
 
 ## State:
 - All marked methods in the OpenCV C++ header are wrapped
-- Most of the OpenCV types have conversion function from and to ruby types
-- Some convenient methods are still missing
 - Memory management needs review
-- Currently, no support for multi threading
+- Currently, no support for multi threading or GPU
 
 ## Supported OpenCV versions:
 - 2.4.4
@@ -19,14 +17,8 @@ oriented experience on the ruby side like he has on the c++ side.
 - 2.4.9
 
 # Installation 
-You have to install opencv 2.4.4 - 2.4.6 or 2.4.9 first. After this you can install the opencv ruby bindings via:
+You have to install opencv 2.4.4 - 2.4.6 or 2.4.9 first. Afterward, you can install opencv ruby bindings via:
 - gem install ropencv
-
-# Additional methods 
-The following methods are available in ruby despite the fact they are not marked to be exported in the c++ headers:
-- drawMatches
-- findEssentialMat (OpenCV 2.4.9)
-- recoverPose (OpenCV 2.4.9)
 
 # Example1
 
@@ -37,7 +29,7 @@ The following methods are available in ruby despite the fact they are not marked
     cv.blur(mat,mat,cv::Size.new(10,10))
 
     detector = cv::FeatureDetector::create("SURF")
-    keypoints = Vector::KeyPoint.new
+    keypoints = Std::Vector.new(cv::KeyPoint)
     detector.detect(mat,keypoints)
 
     puts "found #{keypoints.size} keypoints"
@@ -59,8 +51,8 @@ The following methods are available in ruby despite the fact they are not marked
     extractor = cv::DescriptorExtractor::create("SURF")
     matcher = cv::DescriptorMatcher::create("BruteForce")
 
-    features1 = Vector::KeyPoint.new
-    features2 = Vector::KeyPoint.new
+    features1 = Std::Vector.new(cv::KeyPoint.new)
+    features2 = Std::Vector.new(cv::KeyPoint.new)
     detector.detect mat1,features1
     detector.detect mat2,features2
 
@@ -69,7 +61,7 @@ The following methods are available in ruby despite the fact they are not marked
     extractor.compute(mat1,features1,descriptor1)
     extractor.compute(mat2,features2,descriptor2)
 
-    matches = Vector::DMatch.new
+    matches = Std::Vector(cv::DMatch.new)
     matcher.match(descriptor1,descriptor2,matches)
 
     result = cv::Mat.new

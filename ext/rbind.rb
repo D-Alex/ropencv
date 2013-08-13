@@ -1,5 +1,7 @@
 require 'rbind'
 require 'pp'
+require 'yaml'
+
 require File.join(".",File.dirname(__FILE__),'helper.rb')
 opencv_version,opencv_headers = find_opencv
 
@@ -52,6 +54,20 @@ rbind.cv.chamerMatching.parameter(2).remove_const!
 rbind.parser.type("std::vector<Point3f>")
 rbind.parser.type("std::vector<Point3d>")
 rbind.parser.type("std::vector<Vec4i>")
+
+# add opencv docu
+@doc = YAML.load(File.open(File.join(File.dirname(__FILE__),'opencv.yml')).read)
+rbind.parser.each_type do |t|
+    if @doc.has_key?(t.full_name)
+        t.doc = @doc[t.full_name]
+    end
+    next unless t.is_a?(Rbind::RNamespace)
+    t.each_operation do |op|
+        if @doc.has_key?(op.full_name)
+            op.doc = @doc[op.full_name]
+        end
+    end
+end
 
 # generate files
 rbind.generator_ruby.file_prefix = "ropencv"
