@@ -1,0 +1,12 @@
+<package>
+  <description brief="ruby bindings for opencv">
+  
+  </description>
+  <author>Alexander Duda/Alexander.Duda@dfki.de</author>
+  <license></license>
+  <url>http://</url>
+  <logo>http://</logo>
+
+  <depend package="opencv" />
+  <depend package="tools/rbind" />
+</package>
