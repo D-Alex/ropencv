@@ -55,7 +55,7 @@ def find_opencv
     # find opencv header path
     out = IO.popen("pkg-config --cflags-only-I opencv")
     paths = out.read.split("-I").delete_if(&:empty?).map do |i|
-        i.gsub("\n","").gsub(" ","").gsub("opencv","")
+        i.gsub("\n","").gsub(" ","")
     end
     raise "Cannot find OpenCV" if paths.empty?
 
@@ -93,13 +93,15 @@ def find_opencv
 
     # check that all headers are available
     headers = headers.map do |i|
-        path = File.join(paths[0],i)
-        if !File.exist?(path)
-            ::Rbind.log.info "OpenCV version does not support #{path}"
-            nil
+	path = paths.find do |p|
+	           p = File.join(p,i)
+	           File.exist?(p)
+	       end
+        if path
+            File.join(path,i)
         else
-            path
-        end
+            ::Rbind.log.info "OpenCV version does not support #{path}"
+	end
     end.compact
     Rbind.log.info "found opencv #{opencv_version}: #{paths[0]}"
     [opencv_version,headers]
