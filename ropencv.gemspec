@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
     s.name              = 'ropencv'
-    s.version           = '0.0.8'
+    s.version           = '0.0.9'
     s.date              = '2013-08-13'
     s.platform          = Gem::Platform::RUBY
     s.authors           = ['Alexander Duda']
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
     s.files             = `git ls-files`.split("\n") + ["lib/ropencv/ropencv_types.rb","lib/ropencv/ropencv_ruby.rb"]
     s.require_path      = 'lib'
     s.required_rubygems_version = ">= 1.3.6"
-    s.add_runtime_dependency "rbind", "~> 0.0.16"
+    s.add_runtime_dependency "rbind", "~> 0.0.17"
     s.add_runtime_dependency "ffi", "~> 1.9.0"
     s.extensions = ['ext/extconf.rb']
 end
