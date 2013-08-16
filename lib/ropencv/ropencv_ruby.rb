@@ -7,22 +7,26 @@ module OpenCV
         end
     end
 
-    class Std::Vector::Cv_Mat
-        def self.to_native(obj,context)
-            if obj.is_a?(Vector::Std_Vector_Cv_Point2f)
-                t = Vector::Cv_Mat.new
-                obj.each do |e|
-                    t << cv::Mat.new(e.size,2,cv::CV_32FC1,e.data,cv::Mat::AUTO_STEP)
+    module Std
+        class Vector
+            class Cv_Mat
+                def self.to_native(obj,context)
+                    if obj.is_a?(Vector::Std_Vector_Cv_Point2f)
+                        t = Vector::Cv_Mat.new
+                        obj.each do |e|
+                            t << cv::Mat.new(e.size,2,cv::CV_32FC1,e.data,cv::Mat::AUTO_STEP)
+                        end
+                        t.__obj_ptr__
+                    elsif obj.is_a?(Vector::Std_Vector_Cv_Point)
+                        t = Vector::Cv_Mat.new
+                        obj.each do |e|
+                            t << cv::Mat.new(e.size,2,cv::CV_32SC1,e.data,cv::Mat::AUTO_STEP)
+                        end
+                        t.__obj_ptr__
+                    else
+                        rbind_to_native(obj,context)
+                    end
                 end
-                t.__obj_ptr__
-            elsif obj.is_a?(Vector::Std_Vector_Cv_Point)
-                t = Vector::Cv_Mat.new
-                obj.each do |e|
-                    t << cv::Mat.new(e.size,2,cv::CV_32SC1,e.data,cv::Mat::AUTO_STEP)
-                end
-                t.__obj_ptr__
-            else
-                rbind_to_native(obj,context)
             end
         end
     end
