@@ -68,7 +68,7 @@ rbind.parser.cv.doc = "ROpenCV API Documentation for OpenCV #{opencv_version}"
 # the ruby files
 if ARGV.include?("--doc")
     Rbind.log.info "processing opencv.yml"
-    @doc = YAML.load(File.open(File.join(File.dirname(__FILE__),'opencv.yml')).read)
+    @doc = YAML.load(File.open(File.join(File.dirname(__FILE__),'opencv.yml'),"r:ascii").read)
     rbind.parser.each_type do |t|
         if @doc.has_key?(t.full_name)
             t.doc = @doc[t.full_name]
