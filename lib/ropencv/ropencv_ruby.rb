@@ -156,7 +156,7 @@ module OpenCV
                                [obj.size,1,obj.first]
                            end
                     setter,step,type = if e.is_a? Fixnum
-                                           [:put_array_of_uint8,w,CV_8UC1]
+                                           [:put_array_of_int32,w,CV_32SC1]
                                        elsif e.is_a? Float
                                            [:put_array_of_float64,8*w,CV_64FC1]
                                        else
