@@ -156,7 +156,7 @@ module OpenCV
                                [obj.size,1,obj.first]
                            end
                     setter,step,type = if e.is_a? Fixnum
-                                           [:put_array_of_int32,w,CV_32SC1]
+                                           [:put_array_of_int32,4*w,CV_32SC1]
                                        elsif e.is_a? Float
                                            [:put_array_of_float64,8*w,CV_64FC1]
                                        else
@@ -207,8 +207,6 @@ module OpenCV
                     data.get_int16(i*step+j*2)
                 when CV_32S
                     data.get_int32(i*step+j*4)
-                when CV_32F
-                    data.get_float32(i*step+j*4)
                 when CV_32F
                     data.get_float32(i*step+j*4)
                 when CV_64F
@@ -264,11 +262,11 @@ module OpenCV
                 when CV_8U
                     data.put_uint8(i*step+j,val)
                 when CV_16U
-                    data.put_uint16(i*step+j,val*2)
+                    data.put_uint16(i*step+j*2,val)
                 when CV_16S
-                    data.put_int16(i*step+j,val*2)
+                    data.put_int16(i*step+j*2,val)
                 when CV_32S
-                    data.put_int32(i*step+j,val*4)
+                    data.put_int32(i*step+j*4,val)
                 when CV_32F
                     data.put_float32(i*step+j*4,val)
                 when CV_64F
