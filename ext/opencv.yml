@@ -13723,7 +13723,7 @@ cv::CvMat: |-
   `CV_MAT_ELEM(matrix, type, i, j*nchannels + channel_idx)`.
   
   `CvMat` is now obsolete; consider using :ocvMat instead.
-cv::CvMatND: `CvMatND` is now obsolete; consider using :ocvMat instead.
+cv::CvMatND: CvMatND is now obsolete; consider using :ocvMat instead.
 cv::IplImage: |-
   The `IplImage` is taken from the Intel Image Processing Library, in
   which the format is native. OpenCV only supports a subset of possible
