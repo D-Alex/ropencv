@@ -381,6 +381,48 @@ module OpenCV
                     pp.text str
             end
 
+            def each_row_with_index(&block)
+                if block_given?
+                    r = rows
+                    0.upto(r-1) do |i|
+                        yield(row(i),i)
+                    end
+                else
+                    to_enum(:each_row_with_index)
+                end
+            end
+
+            def each_col_with_index(&block)
+                if block_given?
+                    c = cols
+                    0.upto(c-1) do |i|
+                        yield(col(i),i)
+                    end
+                else
+                    to_enum(:each_col_with_index)
+                end
+            end
+
+            def each_row(&block)
+                if block_given?
+                    each_row_with_index do |r,i|
+                        yield(r)
+                    end
+                else
+                    to_enum(:each_row)
+                end
+            end
+
+            def each_col(&block)
+                if block_given?
+                    each_col_with_index do |c,i|
+                        yield(c)
+                    end
+                else
+                    to_enum(:each_col)
+                end
+            end
+
             def to_a
                 h,w,c,s,ptr = [rows,cols,channels,step,data]
                 getter = case type & 7

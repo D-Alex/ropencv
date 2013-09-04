@@ -49,6 +49,79 @@ describe Cv::Mat do
         end
     end
 
+    describe "each_row" do
+        it "iterators over each row" do
+            mat = cv::Mat.new([1,2,3],[3,3,3],[5,6,7])
+            result = []
+            mat.each_row do |r|
+                result << r
+            end
+            assert_equal [1,2,3], result[0].to_a.flatten!
+            assert_equal [3,3,3], result[1].to_a.flatten!
+            assert_equal [5,6,7], result[2].to_a.flatten!
+        end
+        it "returns an enumerator if no block is given" do
+            mat = cv::Mat.new([1,2,3],[3,3,3],[5,6,7])
+            result = mat.each_row.to_a
+            assert_equal [1,2,3], result[0].to_a.flatten!
+            assert_equal [3,3,3], result[1].to_a.flatten!
+            assert_equal [5,6,7], result[2].to_a.flatten!
+        end
+    end
+
+    describe "each_row_with_index" do
+        it "iterators over each row" do
+            mat = cv::Mat.new([1,2,3],[3,3,3],[5,6,7])
+            result = []
+            result_i = []
+            mat.each_row_with_index do |r,i|
+                result << r
+                result_i << i
+            end
+            assert_equal [1,2,3], result[0].to_a.flatten!
+            assert_equal [3,3,3], result[1].to_a.flatten!
+            assert_equal [5,6,7], result[2].to_a.flatten!
+            assert_equal [0,1,2], result_i
+        end
+    end
+
+    describe "each_col" do
+        it "iterators over each col" do
+            mat = cv::Mat.new([1,2,3],[3,3,3],[5,6,7])
+            result = []
+            mat.each_col do |r|
+                result << r
+            end
+            assert_equal [1,3,5], result[0].to_a.flatten!
+            assert_equal [2,3,6], result[1].to_a.flatten!
+            assert_equal [3,3,7], result[2].to_a.flatten!
+        end
+        it "returns an enumerator if no block is given" do
+            mat = cv::Mat.new([1,2,3],[3,3,3],[5,6,7])
+            result = mat.each_col.to_a
+            assert_equal [1,3,5], result[0].to_a.flatten!
+            assert_equal [2,3,6], result[1].to_a.flatten!
+            assert_equal [3,3,7], result[2].to_a.flatten!
+        end
+    end
+
+    describe "each_col_with_index" do
+        it "iterators over each col" do
+            mat = cv::Mat.new([1,2,3],[3,3,3],[5,6,7])
+            result = []
+            result_i = []
+            mat.each_col_with_index do |c,i|
+                result << c
+                result_i << i
+            end
+            assert_equal [1,3,5], result[0].to_a.flatten!
+            assert_equal [2,3,6], result[1].to_a.flatten!
+            assert_equal [3,3,7], result[2].to_a.flatten!
+            assert_equal [0,1,2], result_i
+        end
+    end
+
+
     describe "[]" do
         it "can return a specific value" do
             mat = cv::Mat.new([1,2,3],[3,3,3],[5,6,7])
