@@ -163,7 +163,7 @@ module OpenCV
                                        elsif e.is_a? Float
                                            [:put_array_of_float64,8*w,CV_64FC1]
                                        else
-                                           raise "cannot connvert arrays of #{e.class} to array"
+                                           raise ArgumentError,"cannot connvert array of #{e.class} to cv::Mat"
                                        end
                     mat = Mat.new(h,w,type)
                     ptr = mat.data
@@ -172,7 +172,7 @@ module OpenCV
                         setter.call(0,obj)
                     else
                         obj.each_with_index do |row,i|
-                            raise "number of row elements must be equal for each row" if row.size != w
+                            raise ArgumentError, "number of row elements must be equal for each row" if row.size != w
                             setter.call(i*step,row)
                         end
                     end
