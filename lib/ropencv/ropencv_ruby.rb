@@ -1,8 +1,11 @@
 module OpenCV
     def self.included(obj)
-        obj.class_eval do 
+        obj.class_eval do
             def cv
                 Cv
+            end
+            def std
+                Std
             end
         end
     end
