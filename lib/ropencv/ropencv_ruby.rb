@@ -71,6 +71,44 @@ module OpenCV
             end
         end
 
+        module Vec2x
+            def self.included base
+                base.instance_eval do
+                    def to_native(obj,context)
+                        if obj.is_a? ::OpenCV::Cv::Point
+                            self.new(obj.x,obj.y).__obj_ptr__
+                        elsif obj.is_a? ::OpenCV::Cv::Point2f
+                            self.new(obj.x,obj.y).__obj_ptr__
+                        elsif obj.is_a? ::OpenCV::Cv::Point2d
+                            self.new(obj.x,obj.y).__obj_ptr__
+                        elsif obj.is_a?(::OpenCV::Cv::Mat) && obj.rows == 2 && obj.cols == 1
+                            self.new(obj[0],obj[1]).__obj_ptr__
+                        else
+                            rbind_to_native(obj,context)
+                        end
+                    end
+                end
+            end
+        end
+
+        module Vec3x
+            def self.included base
+                base.instance_eval do
+                    def to_native(obj,context)
+                        if obj.is_a? ::OpenCV::Cv::Point3f
+                            self.new(obj.x,obj.y,obj.z).__obj_ptr__
+                        elsif obj.is_a? ::OpenCV::Cv::Point3d
+                            self.new(obj.x,obj.y,obj.z).__obj_ptr__
+                        elsif obj.is_a?(::OpenCV::Cv::Mat) && obj.rows == 3 && obj.cols == 1
+                            self.new(obj[0],obj[1],obj[2]).__obj_ptr__
+                        else
+                            rbind_to_native(obj,context)
+                        end
+                    end
+                end
+            end
+        end
+
         module Vecxd
             def [](i)
                 raise "Out of bound #{i}" if i < 0 || i >= self.class::SIZE
@@ -113,13 +151,13 @@ module OpenCV
             end
         end
 
-        class Vec2d;include Vecxd; SIZE=2;end
-        class Vec2f;include Vecxf; SIZE=2;end
-        class Vec2i;include Vecxi; SIZE=2;end
+        class Vec2d;include Vecxd;include Vec2x; SIZE=2;end
+        class Vec2f;include Vecxf;include Vec2x; SIZE=2;end
+        class Vec2i;include Vecxi;include Vec2x; SIZE=2;end
 
-        class Vec3d;include Vecxd; SIZE=3;end
-        class Vec3f;include Vecxf; SIZE=3;end
-        class Vec3i;include Vecxi; SIZE=3;end
+        class Vec3d;include Vecxd;include Vec3x; SIZE=3;end
+        class Vec3f;include Vecxf;include Vec3x; SIZE=3;end
+        class Vec3i;include Vecxi;include Vec3x; SIZE=3;end
 
         class Vec4d;include Vecxd; SIZE=4;end
         class Vec4f;include Vecxf; SIZE=4;end
