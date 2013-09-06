@@ -13,10 +13,11 @@ rbind.includes = opencv_headers
 rbind.parser.type_alias["const_c_string"] = rbind.c_string.to_const
 if opencv_version >= "2.4.9"
     rbind.add_std_types
+    rbind.parser.add_type OpenCVPtr2.new
 else
     rbind.add_std_vector
+    rbind.parser.add_type OpenCVPtr.new
 end
-rbind.parser.add_type OpenCVPtr.new
 
 # add Vec types
 2.upto(6) do |idx|
@@ -79,6 +80,14 @@ if ARGV.include?("--doc")
                 op.doc = @doc[op.full_name]
             end
         end
+    end
+end
+
+# replace default parameter values which are template
+# functions and not available on the ruby side
+Rbind::GeneratorRuby.on_normalize_default_value do |parameter|
+    if parameter.default_value =~ /.*makePtr<(.*)>\(\)/
+        "cv::Ptr<#{$1}>(new #{$1})"
     end
 end
 

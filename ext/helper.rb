@@ -27,6 +27,36 @@ class OpenCVPtr < Rbind::RTemplateClass
     end
 end
 
+# Template for opencv's new smart pointer
+class OpenCVPtr2 < Rbind::RTemplateClass
+    def initialize(name="cv::Ptr")
+        super
+    end
+
+    def specialize(klass,*parameters)
+        if parameters.size != 1
+            raise ArgumentError,"OpenCVPtr2 does only support one template parameter. Got: #{parameters}}"
+        end
+        ptr_type = parameters.first
+
+        klass.add_operation Rbind::ROperation.new(klass.name,nil,Rbind::RParameter.new("other",klass))
+        klass.add_operation Rbind::ROperation.new(klass.name,nil,Rbind::RParameter.new("p",ptr_type.to_ptr))
+        klass.add_operation Rbind::ROperation.new("release",type("void"))
+        klass.add_operation Rbind::ROperation.new("reset",type("void"),Rbind::RParameter.new("p",ptr_type.to_ptr))
+        klass.add_operation Rbind::ROperation.new("swap",type("void"),Rbind::RParameter.new("other",klass))
+        klass.add_operation Rbind::ROperation.new("get",ptr_type.to_ptr)
+        klass.add_operation Rbind::ROperation.new("empty",type("bool"))
+        klass
+    end
+
+    def specialize_ruby_specialization(klass)
+        "    def method_missing(m,*args)\n"\
+            "        raise \"Ptr #{self} is empty. Cannot call \#{m} on it!\" if empty\n"\
+        "        get.method(m).call(*args)\n"\
+            "    end\n"
+    end
+end
+
 class Vec < Rbind::RClass
     def initialize(name,type,size)
         super(name)
