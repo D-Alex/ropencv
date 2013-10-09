@@ -37,9 +37,16 @@ rbind.parse_headers
 rbind.parse File.join(File.dirname(__FILE__),"post_opencv244.txt")
 
 # post parsing + patching wrong signatures
-if opencv_version >= "2.4.9"
+if opencv_version == "2.4.9"
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
     rbind.cv.randShuffle.parameter(2).remove_const!
+end
+if opencv_version >= "3.0.0"
+    rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
+    rbind.cv.randShuffle.parameter(2).remove_const!
+    rbind.cv.AlignExposures.process.parameter(1).remove_const!
+    rbind.cv.AlignMTB.process[0].parameter(1).remove_const!
+    rbind.cv.AlignMTB.process[1].parameter(1).remove_const!
 end
 
 rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(2).remove_const!
