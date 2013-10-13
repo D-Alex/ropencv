@@ -229,17 +229,17 @@ cv.Size.Size
     int height
 cv.Size.area int
 class cv.Size2f
-    int width  /RW
-    int height /RW
+    float width  /RW
+    float height /RW
 cv.Size2f.Size2f
 cv.Size2f.Size2f
     Size2f sz
 cv.Size2f.Size2f
     Point2f  pt
 cv.Size2f.Size2f
-    int width
-    int height
-cv.Size2f.area int
+    float width
+    float height
+cv.Size2f.area float
 cv.Rect.Rect
 cv.Rect.Rect
     Rect rect
