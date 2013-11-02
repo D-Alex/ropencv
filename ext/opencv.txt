@@ -122,8 +122,12 @@ cv.Point.cross double
     Point pt
 cv.Point.inside bool
     Rect rect
-cv.Point.operator+ void
+cv.Point.operator+ Point
     Point pt
+cv.Point.operator- Point
+    Point pt
+cv.Point.operator* Point
+    int val
 cv.Point.operator== bool
     Point pt
 cv.Point.operator!= bool
@@ -143,8 +147,12 @@ cv.Point2f.dot double
     Point2f pt
 cv.Point2f.cross double
     Point2f pt
-cv.Point2f.operator+ void
+cv.Point2f.operator+ Point2f
     Point2f pt
+cv.Point2f.operator- Point2f
+    Point2f pt
+cv.Point2f.operator* Point2f
+    float val
 cv.Point2f.operator== bool
     Point2f pt
 cv.Point2f.operator!= bool
@@ -156,8 +164,12 @@ cv.Point2d.Point2d
 cv.Point2d.Point2d
     double x
     double y
-cv.Point2d.operator+ void
+cv.Point2d.operator+ Point2d
     Point2d pt
+cv.Point2d.operator- Point2d
+    Point2d pt
+cv.Point2d.operator* Point2d
+    double val
 cv.Point2d.Point2d
     Point2d pt
 cv.Point2d.dot double
@@ -187,8 +199,12 @@ cv.Point3f.ddot double
     Point3f pt
 cv.Point3f.cross Point3f
     Point3f pt
-cv.Point3f.operator+ void
+cv.Point3f.operator+ Point3f
     Point3f pt
+cv.Point3f.operator- Point3f
+    Point3f pt
+cv.Point3f.operator* Point3f
+    float val
 cv.Point3f.operator== bool
     Point3f pt
 cv.Point3f.operator!= bool
@@ -210,8 +226,12 @@ cv.Point3d.ddot double
     Point3d pt
 cv.Point3d.cross Point3d
     Point3d pt
-cv.Point3d.operator+ void
+cv.Point3d.operator+ Point3d
     Point3d pt
+cv.Point3d.operator- Point3d
+    Point3d pt
+cv.Point3d.operator* Point3d
+    double val
 cv.Point3d.operator== bool
     Point3d pt
 cv.Point3d.operator!= bool
