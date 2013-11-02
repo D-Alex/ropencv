@@ -185,11 +185,11 @@ module OpenCV
 
             def self.to_native(obj,context)
                 if obj.is_a?(Std::Vector::Cv_Point)
-                    cv::Mat.new(obj.size,2,cv::CV_32SC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
+                    cv::Mat.new(obj.size,1,cv::CV_32SC2,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Cv_Point2f)
-                    cv::Mat.new(obj.size,2,cv::CV_32FC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
+                    cv::Mat.new(obj.size,1,cv::CV_32FC2,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Cv_Point3f)
-                    cv::Mat.new(obj.size,3,cv::CV_32FC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
+                    cv::Mat.new(obj.size,1,cv::CV_32FC3,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Fixnum)
                     cv::Mat.new(obj.size,1,cv::CV_32SC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Array)
