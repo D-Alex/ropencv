@@ -10,6 +10,14 @@ module OpenCV
         end
     end
 
+    def self.std
+        Std
+    end
+
+    def self.cv
+        Cv
+    end
+
     module Std
         class Vector
             class Cv_Mat
