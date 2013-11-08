@@ -469,4 +469,143 @@ cv.RNG.fill void
     bool saturateRange false
 cv.RNG.gaussian double
     double sigma
+class cv.FileStorage
+cv.write void =write_scalar_int
+    FileStorage fs /IO
+    int val
+cv.write void =write_scalar_float
+    FileStorage fs /IO
+    float val
+cv.write void =write_scalar_double
+    FileStorage fs /IO
+    double val
+cv.write void =write_scalar_string
+    FileStorage fs /IO
+    String val
+cv.write void =write_int
+    FileStorage fs /IO
+    String name
+    int val
+cv.write void =write_float
+    FileStorage fs /IO
+    String name
+    float val
+cv.write void =write_double
+    FileStorage fs /IO
+    String name
+    double val
+cv.write void =write_string
+    FileStorage fs /IO
+    String name
+    String val
+cv.write void =write_mat
+    FileStorage fs /IO
+    String name
+    Mat val
+cv.write void =write_point
+    FileStorage fs /IO
+    String name
+    Point val
+cv.write void =write_point2f
+    FileStorage fs /IO
+    String name
+    Point2f val
+cv.write void =write_point3f
+    FileStorage fs /IO
+    String name
+    Point3f val
+cv.write void =write_point2d
+    FileStorage fs /IO
+    String name
+    Point2d val
+cv.write void =write_point3d
+    FileStorage fs /IO
+    String name
+    Point3d val
+cv.write void =write_rect
+    FileStorage fs /IO
+    String name
+    Rect val
+cv.write void =write_range
+    FileStorage fs /IO
+    String name
+    Range val
+cv.write void =write_scalar
+    FileStorage fs /IO
+    String name
+    Scalar val
+cv.write void =write_size
+    FileStorage fs /IO
+    String name
+    Size val
+cv.write void =write_vec2f
+    FileStorage fs /IO
+    String name
+    Vec2f val
+cv.write void =write_vec3f
+    FileStorage fs /IO
+    String name
+    Vec3f val
+cv.write void =write_vec2d
+    FileStorage fs /IO
+    String name
+    Vec2d val
+cv.write void =write_vec3d
+    FileStorage fs /IO
+    String name
+    Vec3d val
+cv.read void =read_int
+    FileNode fn /IO
+    int val /O
+    int default_val
+cv.read void =read_float
+    FileNode fn /IO
+    float val /O
+    float default_val
+cv.read void =read_double
+    FileNode fn /IO
+    double val /O
+    double default_val
+cv.read void =read_string
+    FileNode fn /IO
+    String val /O
+    String default_val
+cv.read void =read_mat
+    FileNode fn /IO
+    Mat val /O
+    Mat default_val
+cv.FileStorage.operator<< FileStorage =write_int /O
+    int val
+cv.FileStorage.operator<< FileStorage =write_float /O
+    float val
+cv.FileStorage.operator<< FileStorage =write_double /O
+    double val
+cv.FileStorage.operator<< FileStorage =write_string /O
+    String val
+cv.FileStorage.operator<< FileStorage =write_size /O
+    Size val
+cv.FileStorage.operator<< FileStorage =write_point /O
+    Point val
+cv.FileStorage.operator<< FileStorage =write_point2f /O
+    Point2f val
+cv.FileStorage.operator<< FileStorage =write_point3f /O
+    Point3f val
+cv.FileStorage.operator<< FileStorage =write_point2d /O
+    Point2d val
+cv.FileStorage.operator<< FileStorage =write_point3d /O
+    Point3d val
+cv.FileStorage.operator<< FileStorage =write_rect /O
+    Rect val
+cv.FileStorage.operator<< FileStorage =write_mat /O
+    Mat val
+cv.FileNode.operator>> void =read_int
+    int val /IO
+cv.FileNode.operator>> void =read_float
+    float val /IO
+cv.FileNode.operator>> void =read_double
+    double val /IO
+cv.FileNode.operator>> void =read_string
+    String val /IO
+cv.FileNode.operator>> void =read_mat
+    Mat val /IO
 
