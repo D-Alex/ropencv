@@ -598,6 +598,7 @@ cv.FileStorage.operator<< FileStorage =write_rect /O
     Rect val
 cv.FileStorage.operator<< FileStorage =write_mat /O
     Mat val
+class cv.FileNodeIterator
 cv.FileNode.operator>> void =read_int
     int val /IO
 cv.FileNode.operator>> void =read_float
@@ -608,4 +609,13 @@ cv.FileNode.operator>> void =read_string
     String val /IO
 cv.FileNode.operator>> void =read_mat
     Mat val /IO
+cv.FileNode.begin FileNodeIterator
+cv.FileNode.end FileNodeIterator
+cv.FileNodeIterator.operator++ FileNodeIterator
+cv.FileNodeIterator.operator-- FileNodeIterator
+cv.FileNodeIterator.operator* FileNode =to_node
+cv.FileNodeIterator.operator== bool
+    FileNodeIterator other
+cv.FileNodeIterator.operator!= bool
+    FileNodeIterator other
 

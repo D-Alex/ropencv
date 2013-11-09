@@ -177,6 +177,127 @@ module OpenCV
 
         class Scalar; include Vecxd; SIZE=4;end
 
+        class FileStorage
+            include Enumerable
+
+            def each(&block)
+                if block_given?
+                    root.each(&block)
+                else
+                    to_enum(:each)
+                end
+            end
+
+            def <<(val)
+                if val.is_a?(Fixnum)
+                    write_int(val)
+                elsif val.is_a?(Float)
+                    write_double(val)
+                else
+                    name = val.class.name.split("::").last.downcase
+                    send("write_#{name}",val)
+                end
+            end
+
+            def method_missing(m,*args)
+                if args.empty?
+                    self[m.to_s]
+                else
+                    super
+                end
+            end
+        end
+
+        class FileNode
+            include Enumerable
+            alias :empty? :empty
+            alias :int? :isInt
+            alias :real? :isReal
+            alias :string? :isString
+            alias :map? :isMap
+            alias :seq? :isSeq
+
+            def each(&block)
+                if block_given?
+                    iter = self.begin()
+                    while(iter != self.end())
+                        yield(iter.to_node)
+                        iter.plusplus_operator
+                    end
+                else
+                    to_enum(:each)
+                end
+            end
+
+            def to_array_of_int
+                raise RuntimeError, "FileNode is not the root node of a sequence" unless seq?
+                map(&:to_int)
+            end
+
+            def to_array_of_float
+                raise RuntimeError, "FileNode is not the root node of a sequence" unless seq?
+                map(&:to_float)
+            end
+
+            def to_array_of_double
+                raise RuntimeError, "FileNode is not the root node of a sequence" unless seq?
+                map(&:to_double)
+            end
+
+            def to_array_of_string
+                raise RuntimeError, "FileNode is not the root node of a sequence" unless seq?
+                map(&:to_string)
+            end
+
+            def to_mat
+                raise RuntimeError, "FileNode is empty" if empty?
+                raise RuntimeError, "FileNode is not storing a Mat" unless isMap
+                val = cv::Mat.new
+                read_mat(val)
+                val
+            end
+
+            def to_float
+                raise RuntimeError, "FileNode is empty" if empty?
+                raise RuntimeError, "FileNode is not storing a float" unless isReal
+                p = FFI::MemoryPointer.new(:float,1)
+                read_float(p)
+                p.get_float32 0
+            end
+
+            def to_double
+                raise RuntimeError, "FileNode is empty" if empty?
+                raise RuntimeError, "FileNode is not storing a double" unless isReal
+                p = FFI::MemoryPointer.new(:uchar,8)
+                read_double(p)
+                p.get_float64 0
+            end
+
+            def to_int
+                raise RuntimeError, "FileNode is empty" if empty?
+                raise RuntimeError, "FileNode is not storing a double" unless isInt
+                p = FFI::MemoryPointer.new(:int,1)
+                read_int(p)
+                p.get_int32 0
+            end
+
+            def to_string
+                raise RuntimeError, "FileNode is empty" if empty?
+                raise RuntimeError, "FileNode is not storing a string" unless isString
+                str = cv::String.new
+                read_string(str)
+                str
+            end
+
+            def method_missing(m,*args)
+                if args.empty? && map?
+                    self[m.to_s]
+                else
+                    super
+                end
+            end
+        end
+
         class Mat
             class << self
                 alias :rbind_new :new
