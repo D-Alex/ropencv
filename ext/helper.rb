@@ -106,7 +106,7 @@ def find_opencv
                       "opencv2/contrib/contrib.hpp", "opencv2/nonfree/nonfree.hpp",
                       "opencv2/nonfree/features2d.hpp"]
               elsif opencv_version >= "2.4.9"
-                  ["opencv2/core.hpp", "opencv2/core/types.hpp",
+                  ["opencv2/core.hpp", "opencv2/core/types.hpp","opencv2/core/persistence.hpp",
                       "opencv2/core/utility.hpp", "opencv2/core/base.hpp",
                       "opencv2/contrib.hpp", "opencv2/calib3d.hpp",
                       "opencv2/features2d.hpp", "opencv2/flann.hpp",
