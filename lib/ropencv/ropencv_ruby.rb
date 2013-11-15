@@ -299,6 +299,7 @@ module OpenCV
         end
 
         class Mat
+            include Enumerable
             class << self
                 alias :rbind_new :new
 
@@ -510,6 +511,18 @@ module OpenCV
                     "|#{str}|"
                 end.join("\n")
                     pp.text str
+            end
+
+            def each
+                if block_given?
+                    0.upto(rows-1) do |row|
+                        0.upto(cols-1) do |col|
+                            yield at(row,col)
+                        end
+                    end
+                else
+                    to_enum(:each)
+                end
             end
 
             def each_row_with_index(&block)
