@@ -44,6 +44,12 @@ module OpenCV
     include Std
 
     module Cv
+        def self.min_max_loc(src,min_loc = Point.new,max_loc = Point.new,mask = Mat.new)
+            p = FFI::MemoryPointer.new(:double,2)
+            Rbind::cv_min_max_loc(src, p[0], p[1], min_loc, max_loc, mask)
+            [p[0].read_double,p[1].read_double]
+        end
+
         class Size
             def *(val)
                 Size.new(width*val,height*val)
