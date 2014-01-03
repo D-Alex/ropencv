@@ -274,7 +274,6 @@ cv.Rect.size Size
 cv.Rect.area int
 cv.Rect.contains bool
     Point point
-class CvTermCriteria
 class CvDTreeNode
 class CvSlice
 class cvflann.flann_algorithm_t
@@ -291,6 +290,15 @@ cv.RotatedRect.RotatedRect
 cv.RotatedRect.boundingRect Rect
 class cv.FileNode
 class cv.TermCriteria
+cv.TermCriteria.TermCriteria
+    int type /RW
+    int maxCount /RW
+    double epsilon /RW
+cv.TermCriteria.TermCriteria
+    int type
+    int maxCount
+    double epsilon
+class CvTermCriteria
 class cv.flann::IndexParams
 class cv.flann::SearchParams
 class cv.FeatureDetector
