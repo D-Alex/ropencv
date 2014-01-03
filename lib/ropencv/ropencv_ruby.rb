@@ -362,7 +362,8 @@ module OpenCV
                 cv::Mat.zeros(rows,cols,type)-self
             end
 
-            def at(i,j=nil)
+            def at(i,j=nil,k=0)
+                raise ArgumentError,"channel #{k} out of bound" if k >= channels
                 i,j = if j == nil
                           if i.is_a?(Cv::Point)
                               [i.y,i.x]
@@ -377,6 +378,7 @@ module OpenCV
                 if i >= rows || i < 0 || j >= cols || j <0
                     raise ArgumentError,"out of bound #{i}/#{j} #{rows}/#{cols}"
                 end
+                j = j*channels+k
                 case type & 7
                 when CV_8U
                     data.get_uint8(i*step+j)
@@ -422,7 +424,14 @@ module OpenCV
                 end
             end
 
-            def set(i,j,val=nil)
+            def set(i,j,k=nil,val=nil)
+                k,val = if val == nil
+                            [val,k]
+                        else
+                            [k,val]
+                        end
+                k ||= 0
+                raise ArgumentError,"channel #{k} out of bound" if k >= channels
                 i,j,val = if val == nil
                               if i.is_a?(Cv::Point)
                                   [i.y,i.x,j]
@@ -437,6 +446,7 @@ module OpenCV
                 if i >= rows || i < 0 || j >= cols || j <0
                     raise ArgumentError,"out of bound #{i}/#{j}"
                 end
+                j = j*channels+k
                 case type & 7
                 when CV_8U
                     data.put_uint8(i*step+j,val)
@@ -455,12 +465,12 @@ module OpenCV
                 end
             end
 
-            def [](i,j=nil)
-                at(i,j)
+            def [](i,j=nil,k=0)
+                at(i,j,k)
             end
 
-            def []=(i,j,val=nil)
-                set(i,j,val)
+            def []=(i,j,k=nil,val=nil)
+                set(i,j,k,val)
             end
 
             def -(val)
