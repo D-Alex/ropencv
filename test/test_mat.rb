@@ -127,6 +127,17 @@ describe Cv::Mat do
             mat = cv::Mat.new([1,2,3],[3,3,3],[5,6,7])
             assert_equal 6, mat[2,1]
         end
+
+        it "can access different channels" do
+            mats = std::Vector.new(cv::Mat)
+            mats.push_back(cv::Mat::zeros(10,10,cv::CV_8UC1))
+            mats.push_back(cv::Mat::ones(10,10,cv::CV_8UC1))
+            mat = cv::Mat.new
+            cv::merge(mats,mat)
+
+            assert_equal 0, mat[9,9]
+            assert_equal 1, mat[8,8,1]
+        end
     end
 
     describe "[]=" do
@@ -135,6 +146,20 @@ describe Cv::Mat do
             assert_equal [[1,2,3],[3,3,3],[5,6,7]], mat.to_a
             mat[1,2] = 4
             assert_equal [[1,2,3],[3,3,4],[5,6,7]], mat.to_a
+        end
+
+        it "can change different channels" do
+            mats = std::Vector.new(cv::Mat)
+            mat = cv::Mat::zeros(10,10,cv::CV_32FC3)
+
+            mat[9,9,0] = 123
+            mat[9,9,1] = 130
+            mat[9,9,2] = 140
+
+            cv::split(mat,mats)
+            assert_equal 123.0, mats[0][9,9]
+            assert_equal 130.0, mats[1][9,9]
+            assert_equal 140.0, mats[2][9,9]
         end
     end
 end
