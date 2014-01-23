@@ -115,7 +115,7 @@ def find_opencv
                       "opencv2/nonfree/features2d.hpp", "opencv2/objdetect.hpp",
                       "opencv2/photo.hpp", "opencv2/softcascade.hpp",
                       "opencv2/stitching.hpp", "opencv2/superres.hpp",
-                      "opencv2/video.hpp", "opencv2/legacy.hpp","opencv2/tracking.hpp",
+                      "opencv2/video.hpp", "opencv2/legacy.hpp","opencv2/video/tracking.hpp",
                       "opencv2/videostab.hpp"]
     else
         raise "OpenCV version #{opencv_version} is not supported"
