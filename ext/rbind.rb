@@ -48,6 +48,14 @@ elsif opencv_version >= "3.0.0"
     rbind.cv.AlignMTB.process[1].parameter(1).remove_const!
 end
 
+rbind.cv.calcOpticalFlowSF[0].parameter(0).remove_const!
+rbind.cv.calcOpticalFlowSF[0].parameter(1).remove_const!
+rbind.cv.calcOpticalFlowSF[0].parameter(2).remove_const!
+
+rbind.cv.calcOpticalFlowSF[1].parameter(0).remove_const!
+rbind.cv.calcOpticalFlowSF[1].parameter(1).remove_const!
+rbind.cv.calcOpticalFlowSF[1].parameter(2).remove_const!
+
 rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(2).remove_const!
 rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(3).remove_const!
 
