@@ -330,9 +330,17 @@ module OpenCV
                     cv::Mat.new(obj.size,1,cv::CV_32SC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Array)
                     h,w,e= if obj.first.is_a? Array
-                               [obj.size,obj.first.size,obj.first.first]
+                               if obj.find {|array| array.find(Float)}
+                                   [obj.size,obj.first.size,obj.first.first.to_f]
+                               else
+                                   [obj.size,obj.first.size,obj.first.first]
+                               end
                            else
-                               [obj.size,1,obj.first]
+                               if obj.find(Float)
+                                   [obj.size,1,obj.first.to_f]
+                               else
+                                   [obj.size,1,obj.first]
+                               end
                            end
                     setter,step,type = if e.is_a? Fixnum
                                            [:put_array_of_int32,4*w,CV_32SC1]
