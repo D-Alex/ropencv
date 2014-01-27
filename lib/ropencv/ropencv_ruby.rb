@@ -591,6 +591,18 @@ module OpenCV
                 end
             end
 
+            # returns a string compatible to matlab's MAT-file
+            def to_MAT(variable_name)
+<<eos
+# Created by ropencv, #{Time.now}
+# name: #{variable_name}
+# type: matrix
+# rows: #{rows}
+# columns: #{cols}
+#{to_a.map{|row|row.join(" ")}.join("\n")}
+eos
+            end
+
             def to_a
                 h,w,c,s,ptr = [rows,cols,channels,step,data]
                 getter = case type & 7
