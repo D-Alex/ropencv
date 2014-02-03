@@ -15,7 +15,7 @@ class OpenCVPtr < Rbind::RTemplateClass
         klass.add_operation Rbind::ROperation.new("release",type("void"))
         klass.add_operation Rbind::ROperation.new("delete_obj",type("void"))
         klass.add_operation Rbind::ROperation.new("empty",type("bool"))
-        klass.add_attribute Rbind::RAttribute.new("obj",ptr_type.to_ptr)
+        klass.add_attribute Rbind::RAttribute.new("obj",ptr_type.to_ptr.to_ownership(false))
         klass
     end
 
@@ -44,7 +44,7 @@ class OpenCVPtr2 < Rbind::RTemplateClass
         klass.add_operation Rbind::ROperation.new("release",type("void"))
         klass.add_operation Rbind::ROperation.new("reset",type("void"),Rbind::RParameter.new("p",ptr_type.to_ptr))
         klass.add_operation Rbind::ROperation.new("swap",type("void"),Rbind::RParameter.new("other",klass))
-        klass.add_operation Rbind::ROperation.new("get",ptr_type.to_ptr)
+        klass.add_operation Rbind::ROperation.new("get",ptr_type.to_ptr.to_ownership(false))
         klass.add_operation Rbind::ROperation.new("empty",type("bool"))
         klass
     end
