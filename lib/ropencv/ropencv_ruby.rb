@@ -25,13 +25,13 @@ module OpenCV
                     if obj.is_a?(Vector::Std_Vector_Cv_Point2f)
                         t = Vector::Cv_Mat.new
                         obj.each do |e|
-                            t << cv::Mat.new(e.size,2,cv::CV_32FC1,e.data,cv::Mat::AUTO_STEP)
+                            t << Cv::Mat.new(e.size,2,Cv::CV_32FC1,e.data,Cv::Mat::AUTO_STEP)
                         end
                         t.__obj_ptr__
                     elsif obj.is_a?(Vector::Std_Vector_Cv_Point)
                         t = Vector::Cv_Mat.new
                         obj.each do |e|
-                            t << cv::Mat.new(e.size,2,cv::CV_32SC1,e.data,cv::Mat::AUTO_STEP)
+                            t << Cv::Mat.new(e.size,2,Cv::CV_32SC1,e.data,Cv::Mat::AUTO_STEP)
                         end
                         t.__obj_ptr__
                     else
@@ -258,7 +258,7 @@ module OpenCV
             def to_mat
                 raise RuntimeError, "FileNode is empty" if empty?
                 raise RuntimeError, "FileNode is not storing a Mat" unless isMap
-                val = cv::Mat.new
+                val = Cv::Mat.new
                 read_mat(val)
                 val
             end
@@ -290,7 +290,7 @@ module OpenCV
             def to_string
                 raise RuntimeError, "FileNode is empty" if empty?
                 raise RuntimeError, "FileNode is not storing a string" unless isString
-                str = cv::String.new
+                str = Cv::String.new
                 read_string(str)
                 str
             end
@@ -321,13 +321,13 @@ module OpenCV
 
             def self.to_native(obj,context)
                 if obj.is_a?(Std::Vector::Cv_Point)
-                    cv::Mat.new(obj.size,1,cv::CV_32SC2,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
+                    Cv::Mat.new(obj.size,1,Cv::CV_32SC2,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Cv_Point2f)
-                    cv::Mat.new(obj.size,1,cv::CV_32FC2,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
+                    Cv::Mat.new(obj.size,1,Cv::CV_32FC2,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Cv_Point3f)
-                    cv::Mat.new(obj.size,1,cv::CV_32FC3,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
+                    Cv::Mat.new(obj.size,1,Cv::CV_32FC3,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Fixnum)
-                    cv::Mat.new(obj.size,1,cv::CV_32SC1,obj.data,cv::Mat::AUTO_STEP).__obj_ptr__
+                    Cv::Mat.new(obj.size,1,Cv::CV_32SC1,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Array)
                     h,w,e= if obj.first.is_a? Array
                                if obj.find {|array| array.find(Float)}
@@ -347,7 +347,7 @@ module OpenCV
                                        elsif e.is_a? Float
                                            [:put_array_of_float64,8*w,CV_64FC1]
                                        else
-                                           raise ArgumentError,"cannot connvert array of #{e.class} to cv::Mat"
+                                           raise ArgumentError,"cannot connvert array of #{e.class} to Cv::Mat"
                                        end
                     mat = Mat.new(h,w,type)
                     ptr = mat.data
@@ -367,7 +367,7 @@ module OpenCV
             end
 
             def -@
-                cv::Mat.zeros(rows,cols,type)-self
+                Cv::Mat.zeros(rows,cols,type)-self
             end
 
             def at(i,j=nil,k=0)
