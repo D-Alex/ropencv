@@ -44,6 +44,10 @@ module OpenCV
     include Std
 
     module Cv
+        # reflect some typedefs
+        GoodFeatureToTrackDetector = GFTTDetector
+        StarFeatureDetector = StarDetector
+
         def self.min_max_loc(src,min_loc = Point.new,max_loc = Point.new,mask = Mat.new)
             p = FFI::MemoryPointer.new(:double,2)
             Rbind::cv_min_max_loc(src, p[0], p[1], min_loc, max_loc, mask)
