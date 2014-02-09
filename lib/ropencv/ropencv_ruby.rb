@@ -45,8 +45,8 @@ module OpenCV
 
     module Cv
         # reflect some typedefs
-        GoodFeatureToTrackDetector = GFTTDetector
-        StarFeatureDetector = StarDetector
+        GoodFeatureToTrackDetector = GFTTDetector if defined? GFTTDetector
+        StarFeatureDetector = StarDetector if defined? StarDetector
 
         def self.min_max_loc(src,min_loc = Point.new,max_loc = Point.new,mask = Mat.new)
             p = FFI::MemoryPointer.new(:double,2)
