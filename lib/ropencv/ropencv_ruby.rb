@@ -332,6 +332,10 @@ module OpenCV
                     Cv::Mat.new(obj.size,1,Cv::CV_32FC3,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Fixnum)
                     Cv::Mat.new(obj.size,1,Cv::CV_32SC1,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
+                elsif obj.is_a?(Std::Vector::Float)
+                    Cv::Mat.new(obj.size,1,Cv::CV_32FC1,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
+                elsif obj.is_a?(Std::Vector::Double)
+                    Cv::Mat.new(obj.size,1,Cv::CV_64FC1,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Array)
                     h,w,e= if obj.first.is_a? Array
                                if obj.find {|array| array.find(Float)}
