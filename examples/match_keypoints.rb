@@ -1,8 +1,8 @@
 require 'ropencv'
 include OpenCV
 
-img1 = cv::imread('tsukuba_l.png',CV_LOAD_IMAGE_GRAYSCALE)
-img2 = cv::imread('tsukuba_r.png',CV_LOAD_IMAGE_GRAYSCALE)
+img1 = cv::imread(File.join('data','tsukuba_l.png'),cv::CV_LOAD_IMAGE_GRAYSCALE)
+img2 = cv::imread(File.join('data','tsukuba_r.png'),cv::CV_LOAD_IMAGE_GRAYSCALE)
 if (img1.empty() || img2.empty())
     puts("Can't read one of the images\n")
     return -1
@@ -28,6 +28,6 @@ matcher.match(descriptors1, descriptors2, matches)
 
 # drawing the results
 img_matches=cv::Mat.new(3, 4, cv::CV_64FC1)
-cv::drawMatches(img1, keypoints1, img2, keypoints2, matches, img_matches)
+cv::draw_matches(img1, keypoints1, img2, keypoints2, matches, img_matches)
 cv::imshow("matches", img_matches)
 cv::waitKey(0)

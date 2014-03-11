@@ -1,7 +1,7 @@
 require 'ropencv'
 include OpenCV
 
-mat = cv::imread("logo.png")
+mat = cv::imread(File.join("data","logo.png"))
 cv.blur(mat,mat,cv::Size.new(10,10))
 
 detector = cv::FeatureDetector::create("SURF")

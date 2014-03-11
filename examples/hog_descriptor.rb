@@ -1,7 +1,9 @@
 require 'ropencv'
 include OpenCV
 
-frame = cv::imread("sample.jpg")
+image_name = File.join(Dir.getwd,'data',"sample.jpg")
+frame = cv::imread(image_name)
+
 detector = cv::HOGDescriptor.new
 people_detector_vec = cv::HOGDescriptor.get_default_people_detector
 default_people_detector_mat = cv::Mat.new(people_detector_vec.size, 1, cv::CV_32FC1, people_detector_vec.data, cv::Mat::AUTO_STEP)

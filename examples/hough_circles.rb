@@ -1,12 +1,12 @@
 require 'ropencv'
 include OpenCV
 
-img = cv::imread("logo.png")
+img = cv::imread(File.join("data","logo.png"))
 gray = cv::Mat.new
-cv::cvtColor(img,gray,CV_BGR2GRAY)
+cv::cvtColor(img,gray,cv::COLOR_BGR2GRAY)
 
 circles = cv::Mat.new
-cv::HoughCircles(gray, circles, CV_HOUGH_GRADIENT, 1, gray.rows/10, 10, 20 );
+cv::HoughCircles(gray, circles, cv::HOUGH_GRADIENT, 1, gray.rows/10, 10, 20 );
 circles = circles.reshape(1,circles.cols)
 
 circles.each_row do |circle|
