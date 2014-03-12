@@ -1,8 +1,3 @@
-const cv.CV_LOAD_IMAGE_UNCHANGED    -1
-const cv.CV_LOAD_IMAGE_GRAYSCALE     0
-const cv.CV_LOAD_IMAGE_COLOR         1
-const cv.CV_LOAD_IMAGE_ANYDEPTH      2
-const cv.CV_LOAD_IMAGE_ANYCOLOR      4
 const cv.CV_LKFLOW_PYR_A_READY       1
 const cv.CV_LKFLOW_PYR_B_READY       2
 const cv.CV_LKFLOW_INITIAL_GUESSES   4
