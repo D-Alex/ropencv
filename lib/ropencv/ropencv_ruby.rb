@@ -310,6 +310,9 @@ module OpenCV
 
         class Mat
             include Enumerable
+            DISPLAYED_ROWS_MAX = 100
+            DISPLAYED_COLS_MAX = 100
+
             class << self
                 alias :rbind_new :new
 
@@ -530,19 +533,23 @@ module OpenCV
             end
 
             def pretty_print(pp)
-                format = case type & 7
-                         when CV_8U
-                             '%3.u'
-                         else
-                             '%6.3f'
-                         end
-                str = to_a.map do |r|
-                    str = r.map do |e|
-                        sprintf(format,e)
-                    end.join(" ")
-                    "|#{str}|"
-                end.join("\n")
-                    pp.text str
+                if(rows <= DISPLAYED_ROWS_MAX && cols <= DISPLAYED_COLS_MAX)
+                    format = case type & 7
+                             when CV_8U
+                                 '%3.u'
+                             else
+                                 '%6.3f'
+                             end
+                    str = to_a.map do |r|
+                        str = r.map do |e|
+                            sprintf(format,e)
+                        end.join(" ")
+                        "|#{str}|"
+                    end.join("\n")
+                        pp.text str
+                else
+                    pp.text self.to_s
+                end
             end
 
             def each
