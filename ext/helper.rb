@@ -100,12 +100,13 @@ def find_opencv
                       "opencv2/imgproc/imgproc_c.h", "opencv2/imgproc/types_c.h",
                       "opencv2/imgproc/imgproc.hpp", "opencv2/photo/photo_c.h",
                       "opencv2/photo/photo.hpp", "opencv2/video/video.hpp","opencv2/video/tracking.hpp",
+                      "opencv2/video/background_segm.hpp",
                       "opencv2/features2d/features2d.hpp", "opencv2/objdetect/objdetect.hpp",
                       "opencv2/calib3d/calib3d.hpp", "opencv2/ml/ml.hpp",
                       "opencv2/highgui/highgui_c.h", "opencv2/highgui/highgui.hpp",
                       "opencv2/contrib/contrib.hpp", "opencv2/nonfree/nonfree.hpp",
                       "opencv2/nonfree/features2d.hpp"]
-              elsif opencv_version >= "2.4.9"
+              elsif opencv_version >= "2.4.9.0"
                   ["opencv2/core.hpp", "opencv2/core/types.hpp","opencv2/core/persistence.hpp",
                       "opencv2/core/utility.hpp", "opencv2/core/base.hpp",
                       "opencv2/contrib.hpp", "opencv2/calib3d.hpp",
@@ -116,6 +117,7 @@ def find_opencv
                       "opencv2/photo.hpp", "opencv2/softcascade.hpp",
                       "opencv2/stitching.hpp", "opencv2/superres.hpp",
                       "opencv2/video.hpp", "opencv2/legacy.hpp","opencv2/video/tracking.hpp",
+                      "opencv2/video/background_segm.hpp",
                       "opencv2/videostab.hpp"]
     else
         raise "OpenCV version #{opencv_version} is not supported"
