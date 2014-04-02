@@ -70,6 +70,7 @@ rbind.cv.chamerMatching.parameter(1).remove_const!
 rbind.cv.chamerMatching.parameter(2).remove_const!
 
 # add some more vector types
+rbind.parser.type("std::vector<Point2d>")
 rbind.parser.type("std::vector<Point3f>")
 rbind.parser.type("std::vector<Point3d>")
 rbind.parser.type("std::vector<Vec4i>")

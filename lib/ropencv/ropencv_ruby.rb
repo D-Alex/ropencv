@@ -28,6 +28,12 @@ module OpenCV
                             t << Cv::Mat.new(e.size,2,Cv::CV_32FC1,e.data,Cv::Mat::AUTO_STEP)
                         end
                         t.__obj_ptr__
+                    elsif obj.is_a?(Vector::Std_Vector_Cv_Point2d)
+                        t = Vector::Cv_Mat.new
+                        obj.each do |e|
+                            t << Cv::Mat.new(e.size,2,Cv::CV_64FC1,e.data,Cv::Mat::AUTO_STEP)
+                        end
+                        t.__obj_ptr__
                     elsif obj.is_a?(Vector::Std_Vector_Cv_Point)
                         t = Vector::Cv_Mat.new
                         obj.each do |e|
@@ -331,8 +337,12 @@ module OpenCV
                     Cv::Mat.new(obj.size,1,Cv::CV_32SC2,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Cv_Point2f)
                     Cv::Mat.new(obj.size,1,Cv::CV_32FC2,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
+                elsif obj.is_a?(Std::Vector::Cv_Point2d)
+                    Cv::Mat.new(obj.size,1,Cv::CV_64FC2,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Cv_Point3f)
                     Cv::Mat.new(obj.size,1,Cv::CV_32FC3,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
+                elsif obj.is_a?(Std::Vector::Cv_Point3d)
+                    Cv::Mat.new(obj.size,1,Cv::CV_64FC3,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Fixnum)
                     Cv::Mat.new(obj.size,1,Cv::CV_32SC1,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Float)
