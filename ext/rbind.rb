@@ -74,6 +74,7 @@ rbind.parser.type("std::vector<Point2d>")
 rbind.parser.type("std::vector<Point3f>")
 rbind.parser.type("std::vector<Point3d>")
 rbind.parser.type("std::vector<Vec4i>")
+rbind.parser.type("std::vector<std::vector<Point2d> >")
 
 # add some extra documentation
 rbind.parser.doc = "ROpenCV API Documentation for OpenCV #{opencv_version}"
