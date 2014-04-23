@@ -10,4 +10,9 @@ cv.drawMatches void
     vector_char matchesMask std::vector<char>()
     int flags DrawMatchesFlags::DEFAULT
 cv.morphologyDefaultBorderValue Scalar
+cv.polyfit void 
+    Mat srcx
+    Mat srcy
+    Mat dst /O
+    int order
 
