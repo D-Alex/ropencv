@@ -374,7 +374,7 @@ module OpenCV
                     ptr = mat.data
                     setter = ptr.method(setter)
                     if h == 1 || w == 1
-                        setter.call(0,obj)
+                        setter.call(0,obj.flatten)
                     else
                         obj.each_with_index do |row,i|
                             raise ArgumentError, "number of row elements must be equal for each row" if row.size != w
