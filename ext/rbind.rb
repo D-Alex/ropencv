@@ -11,7 +11,7 @@ rbind.includes = opencv_headers
 
 # add some templates and alias
 rbind.parser.type_alias["const_c_string"] = rbind.c_string.to_const
-if opencv_version >= "2.4.9"
+if opencv_version >= "3.0.0"
     rbind.add_std_types
     rbind.parser.add_type OpenCVPtr2.new
 else
@@ -39,9 +39,9 @@ rbind.parse File.join(File.dirname(__FILE__),"post_opencv244.txt")
 # post parsing + patching wrong signatures
 if opencv_version >= "2.4.9" && opencv_version < "3.0.0"
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
-    rbind.cv.randShuffle.parameter(2).remove_const!
 elsif opencv_version >= "3.0.0"
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
+    rbind.parse File.join(File.dirname(__FILE__),"post_opencv300.txt")
     rbind.cv.randShuffle.parameter(2).remove_const!
     rbind.cv.AlignExposures.process.parameter(1).remove_const!
     rbind.cv.AlignMTB.process[0].parameter(1).remove_const!
