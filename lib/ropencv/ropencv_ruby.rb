@@ -45,6 +45,7 @@ module OpenCV
                     end
                 end
             end
+            Fixnum = Int
         end
     end
     include Std
@@ -343,7 +344,7 @@ module OpenCV
                     Cv::Mat.new(obj.size,1,Cv::CV_32FC3,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Cv_Point3d)
                     Cv::Mat.new(obj.size,1,Cv::CV_64FC3,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
-                elsif obj.is_a?(Std::Vector::Fixnum)
+                elsif obj.is_a?(Std::Vector::Int)
                     Cv::Mat.new(obj.size,1,Cv::CV_32SC1,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Std::Vector::Float)
                     Cv::Mat.new(obj.size,1,Cv::CV_32FC1,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
