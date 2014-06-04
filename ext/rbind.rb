@@ -74,6 +74,10 @@ rbind.parser.type("std::vector<Point2d>")
 rbind.parser.type("std::vector<Point3f>")
 rbind.parser.type("std::vector<Point3d>")
 rbind.parser.type("std::vector<Vec4i>")
+rbind.parser.type("std::vector<uint32_t>")
+rbind.parser.type("std::vector<uint64_t>")
+rbind.parser.type("std::vector<int8_t>")
+rbind.parser.type("std::vector<int64_t>")
 rbind.parser.type("std::vector<std::vector<Point2d> >")
 
 # add some extra documentation
