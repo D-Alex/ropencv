@@ -123,6 +123,15 @@ def find_opencv
         raise "OpenCV version #{opencv_version} is not supported"
     end
 
+    temp = paths.clone
+    temp.each do |path|
+	if path =~ /(.*)opencv$/
+	    paths << $1
+	elsif path =~ /(.*)opencv2$/
+	    paths << $1
+        end
+    end
+
     # check that all headers are available
     headers = headers.map do |i|
 	path = paths.find do |p|
@@ -132,7 +141,8 @@ def find_opencv
         if path
             File.join(path,i)
         else
-            ::Rbind.log.info "OpenCV version does not support #{path}"
+            ::Rbind.log.info "OpenCV version does not support #{i}"
+            nil
 	end
     end.compact
     Rbind.log.info "found opencv #{opencv_version}: #{paths[0]}"
