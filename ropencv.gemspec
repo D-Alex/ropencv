@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
     s.name              = 'ropencv'
-    s.version           = '0.0.16'
-    s.date              = '2014-07-06'
+    s.version           = '0.0.17'
+    s.date              = '2014-07-11'
     s.platform          = Gem::Platform::RUBY
     s.authors           = ['Alexander Duda']
     s.email             = ['Alexander.Duda@dfki.de']
