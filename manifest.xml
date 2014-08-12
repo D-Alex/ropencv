@@ -7,6 +7,6 @@
   <url>http://</url>
   <logo>http://</logo>
 
-  <depend package="external/opencv" />
+  <depend package="opencv" />
   <depend package="tools/rbind" />
 </package>
