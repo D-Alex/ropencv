@@ -15,4 +15,8 @@ cv.polyfit void
     Mat srcy
     Mat dst /O
     int order
+cv.abs Mat
+    Mat src
+cv.sum Mat
+    Mat src
 
