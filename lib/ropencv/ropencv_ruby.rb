@@ -653,6 +653,49 @@ eos
                 end
                 result
             end
+
+            def ==(val)
+                compare(val,Cv::CMP_EQ)
+            end
+
+            def >(val)
+                compare(val,Cv::CMP_GT)
+            end
+
+            def >=(val)
+                compare(val,Cv::CMP_GE)
+            end
+
+            def <(val)
+                compare(val,Cv::CMP_LT)
+            end
+
+            def <=(val)
+                compare(val,Cv::CMP_LE)
+            end
+
+            def !=(val)
+                compare(val,Cv::CMP_NE)
+            end
+
+            def ===(val)
+                val = compare(val,Cv::CMP_EQ)
+                count = cv::countNonZero(val)
+                count == val.rows*val.cols
+            end
+
+            def compare(val,type)
+                val = if val.is_a?(Cv::Mat)
+                          val
+                      elsif val.respond_to?(:to_a)
+                          val.to_a
+                      else
+                          [val]
+                      end
+                dst = Cv::Mat.new
+                Cv::compare(self,val,dst,type)
+                dst
+            end
         end
     end
 end
