@@ -55,7 +55,7 @@ cv.Range.Range
     int end
 cv.Range.size int
 cv.Range.size bool
-cv.Range.all Range
+cv.Range.all Range /S
 cv.Range.all Range
 cv.Range.operator== bool
     Range r
