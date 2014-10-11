@@ -8,4 +8,11 @@ cv.KeyPoint.convert void /S
     float response
     int octave 0
     int class_id -1
+cv.DescriptorMatcher.radiusMatch void
+    cv::Mat queryDescriptors
+    cv::Mat trainDescriptors
+    vector_vector_DMatch matches /O
+    float maxDistance
+    cv::Mat mask cv::Mat()
+    bool compactResult false
 
