@@ -328,6 +328,27 @@ cv.Mat.Mat
     int type
     void* data 
     size_t step AUTO_STEP
+cv.Mat.Mat
+    Size size
+    int type
+    void* data 
+    size_t step AUTO_STEP
+cv.Mat.Mat
+    int rows
+    int cols
+    int type
+    Scalar scalar
+cv.Mat.Mat
+    Size size
+    int type
+    Scalar scalar
+cv.Mat.Mat
+    Mat m
+    Range row_range
+    Range col_range Range::all()
+cv.Mat.Mat
+    Mat m
+    Rect roi
 cv.Mat.operator+ Mat
     Mat mat
 cv.Mat.operator+ Mat
