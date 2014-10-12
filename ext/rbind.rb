@@ -39,6 +39,18 @@ rbind.parse File.join(File.dirname(__FILE__),"post_opencv244.txt")
 # post parsing + patching wrong signatures
 if opencv_version >= "2.4.9" && opencv_version < "3.0.0"
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
+
+    rbind.cv.calcOpticalFlowSF[0].parameter(0).remove_const!
+    rbind.cv.calcOpticalFlowSF[0].parameter(1).remove_const!
+    rbind.cv.calcOpticalFlowSF[0].parameter(2).remove_const!
+
+    rbind.cv.calcOpticalFlowSF[1].parameter(0).remove_const!
+    rbind.cv.calcOpticalFlowSF[1].parameter(1).remove_const!
+    rbind.cv.calcOpticalFlowSF[1].parameter(2).remove_const!
+
+    rbind.cv.chamerMatching.parameter(0).remove_const!
+    rbind.cv.chamerMatching.parameter(1).remove_const!
+    rbind.cv.chamerMatching.parameter(2).remove_const!
 elsif opencv_version >= "3.0.0"
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv300.txt")
@@ -46,15 +58,12 @@ elsif opencv_version >= "3.0.0"
     rbind.cv.AlignExposures.process.parameter(1).remove_const!
     rbind.cv.AlignMTB.process[0].parameter(1).remove_const!
     rbind.cv.AlignMTB.process[1].parameter(1).remove_const!
+    rbind.CvDTreeNode.ignore = true
+    rbind.CvSlice.ignore = true
+    rbind.CvTermCriteria.ignore = true
+    rbind.cv.polyfit.ignore = true
+    rbind.ml.StatModel.getParams.ignore = true
 end
-
-rbind.cv.calcOpticalFlowSF[0].parameter(0).remove_const!
-rbind.cv.calcOpticalFlowSF[0].parameter(1).remove_const!
-rbind.cv.calcOpticalFlowSF[0].parameter(2).remove_const!
-
-rbind.cv.calcOpticalFlowSF[1].parameter(0).remove_const!
-rbind.cv.calcOpticalFlowSF[1].parameter(1).remove_const!
-rbind.cv.calcOpticalFlowSF[1].parameter(2).remove_const!
 
 rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(2).remove_const!
 rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(3).remove_const!
@@ -65,9 +74,6 @@ rbind.cv.BRISK.operation("BRISK")[1].parameter(0).remove_const!
 rbind.cv.BRISK.operation("BRISK")[1].parameter(1).remove_const!
 
 rbind.cv.putText.parameter(0).remove_const!
-rbind.cv.chamerMatching.parameter(0).remove_const!
-rbind.cv.chamerMatching.parameter(1).remove_const!
-rbind.cv.chamerMatching.parameter(2).remove_const!
 
 # add some more vector types
 rbind.parser.type("std::vector<Point2d>")
