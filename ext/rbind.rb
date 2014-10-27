@@ -9,22 +9,30 @@ rbind = Rbind::Rbind.new("OpenCV")
 rbind.pkg_config << "opencv"
 rbind.includes = opencv_headers
 
-# add some templates and alias
-rbind.parser.type_alias["const_c_string"] = rbind.c_string.to_const
-if opencv_version >= "3.0.0"
-    rbind.add_std_types
-    rbind.parser.add_type OpenCVPtr2.new
-else
-    rbind.add_std_vector
-    rbind.parser.add_type OpenCVPtr.new
-end
-
 # add Vec types
 2.upto(6) do |idx|
     next if idx == 5
     rbind.parser.add_type Vec.new("cv::Vec#{idx}d",rbind.double,idx)
     rbind.parser.add_type Vec.new("cv::Vec#{idx}f",rbind.float,idx)
     rbind.parser.add_type Vec.new("cv::Vec#{idx}i",rbind.int,idx)
+end
+
+# add some templates and alias
+rbind.parser.type_alias["const_c_string"] = rbind.c_string.to_const
+if opencv_version >= "3.0.0"
+    rbind.add_std_types
+    rbind.parser.add_type OpenCVPtr2.new
+    rbind.cv.add_type(Rbind::RClass.new("ShapeTransformer"))
+    rbind.cv.add_type(Rbind::RClass.new("Feature2D"))
+    rbind.cv.type_alias["FeatureDetector"] = rbind.cv.Feature2D
+    rbind.cv.type_alias["DescriptorExtractor"] = rbind.cv.Feature2D
+    # add missing enum values
+    rbind.cv.add_type(Rbind::RClass.new("Stitcher"))
+    rbind.cv.Stitcher.add_type(Rbind::REnum.new("Status"))
+    rbind.cv.Stitcher.Status.values = {:OK => 0, :ERR_NEED_MORE_IMGS => 1,:ERR_HOMOGRAPHY_EST_FAIL => 2,:ERR_CAMERA_PARAMS_ADJUST_FAIL => 3}
+else
+    rbind.add_std_vector
+    rbind.parser.add_type OpenCVPtr.new
 end
 
 # parsing
@@ -51,6 +59,14 @@ if opencv_version >= "2.4.9" && opencv_version < "3.0.0"
     rbind.cv.chamerMatching.parameter(0).remove_const!
     rbind.cv.chamerMatching.parameter(1).remove_const!
     rbind.cv.chamerMatching.parameter(2).remove_const!
+
+    rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(2).remove_const!
+    rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(3).remove_const!
+    rbind.cv.BRISK.generateKernel.parameter(0).remove_const!
+    rbind.cv.BRISK.generateKernel.parameter(1).remove_const!
+    rbind.cv.BRISK.operation("BRISK")[1].parameter(0).remove_const!
+    rbind.cv.BRISK.operation("BRISK")[1].parameter(1).remove_const!
+    rbind.cv.putText.parameter(0).remove_const!
 elsif opencv_version >= "3.0.0"
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv300.txt")
@@ -64,16 +80,6 @@ elsif opencv_version >= "3.0.0"
     rbind.cv.polyfit.ignore = true
     rbind.ml.StatModel.getParams.ignore = true
 end
-
-rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(2).remove_const!
-rbind.cv.CascadeClassifier.detectMultiScale[1].parameter(3).remove_const!
-
-rbind.cv.BRISK.generateKernel.parameter(0).remove_const!
-rbind.cv.BRISK.generateKernel.parameter(1).remove_const!
-rbind.cv.BRISK.operation("BRISK")[1].parameter(0).remove_const!
-rbind.cv.BRISK.operation("BRISK")[1].parameter(1).remove_const!
-
-rbind.cv.putText.parameter(0).remove_const!
 
 # add some more vector types
 rbind.parser.type("std::vector<Point2d>")
