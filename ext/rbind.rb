@@ -79,10 +79,10 @@ elsif opencv_version >= "3.0.0"
     rbind.CvTermCriteria.ignore = true
     rbind.cv.polyfit.ignore = true
     rbind.ml.StatModel.getParams.ignore = true
-end
 
-# mark none polymorphic class
-rbind.cv.ml.DTrees.Params.polymorphic = false
+    # mark none polymorphic class
+    rbind.cv.ml.DTrees.Params.polymorphic = false
+end
 
 # add some more vector types
 rbind.parser.type("std::vector<Point2d>")
