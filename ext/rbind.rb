@@ -132,6 +132,14 @@ Rbind::GeneratorRuby.on_normalize_default_value do |parameter|
     end
 end
 
+# add version
+cmajor = Rbind::RParameter.new(:CV_VERSION_MAJOR,rbind.parser.type("const int"),major)
+cminor= Rbind::RParameter.new(:CV_VERSION_MINOR,rbind.parser.type("const int"),minor)
+crevision = Rbind::RParameter.new(:CV_VERSION_REVISION,rbind.parser.type("const int"),revision)
+rbind.parser.add_const(cmajor)
+rbind.parser.add_const(cminor)
+rbind.parser.add_const(crevision)
+
 # generate files
 rbind.generator_ruby.file_prefix = "ropencv"
 rbind.generate(File.join(File.dirname(__FILE__),"src"),File.join(File.dirname(__FILE__),"..","lib","ropencv"))
