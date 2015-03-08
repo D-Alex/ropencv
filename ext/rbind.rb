@@ -78,10 +78,13 @@ elsif opencv_version >= "3.0.0"
     rbind.CvSlice.ignore = true
     rbind.CvTermCriteria.ignore = true
     rbind.cv.polyfit.ignore = true
-    rbind.ml.StatModel.getParams.ignore = true
 
+    # is removed on opencv master
+    rbind.ml.StatModel.getParams.ignore = true if(rbind.ml.StatModel.operation?('getParams'))
+
+    # is removed on opencv master
     # mark none polymorphic class
-    rbind.cv.ml.DTrees.Params.polymorphic = false
+    rbind.ml.DTrees.Params.polymorphic = false if(rbind.ml.DTrees.type?("Params"))
 end
 
 # add some more vector types
