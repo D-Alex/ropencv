@@ -91,10 +91,13 @@ def find_opencv
 
     #check opencv version
     out = IO.popen("pkg-config --modversion opencv")
-    opencv_version = out.read.chomp
+    out.read.chomp =~ /(\d+).(\d+).(\d+)/
+    major = $1.to_i; minor = $2.to_i; revision = $3.to_i
 
     ##add opencv headers
-    headers = if opencv_version >= "2.4.4" && opencv_version < "2.4.9.0"
+    headers = if major < 1 || (major == 2 && minor <= 4 && revision<= 3)
+                  raise "OpenCV version #{opencv_version} is not supported. At least OpenCV 2.4.4 is required"
+              elsif major == 2
                   ["opencv2/core/core_c.h", "opencv2/core/types_c.h",
                       "opencv2/core/core.hpp", "opencv2/flann/miniflann.hpp",
                       "opencv2/imgproc/imgproc_c.h", "opencv2/imgproc/types_c.h",
@@ -106,20 +109,7 @@ def find_opencv
                       "opencv2/highgui/highgui_c.h", "opencv2/highgui/highgui.hpp",
                       "opencv2/contrib/contrib.hpp", "opencv2/nonfree/nonfree.hpp",
                       "opencv2/nonfree/features2d.hpp"]
-              elsif opencv_version >= "2.4.9" && opencv_version < "3.0.0"
-                  ["opencv2/core.hpp", "opencv2/core/types.hpp","opencv2/core/persistence.hpp",
-                      "opencv2/core/utility.hpp", "opencv2/core/base.hpp","opencv2/core/core.hpp",
-                      "opencv2/contrib.hpp", "opencv2/calib3d.hpp",
-                      "opencv2/features2d.hpp", "opencv2/flann.hpp",
-                      "opencv2/highgui.hpp", "opencv2/imgproc.hpp",
-                      "opencv2/ml.hpp", "opencv2/nonfree.hpp",
-                      "opencv2/nonfree/features2d.hpp", "opencv2/objdetect.hpp",
-                      "opencv2/photo.hpp", "opencv2/softcascade.hpp",
-                      "opencv2/stitching.hpp", "opencv2/superres.hpp",
-                      "opencv2/video.hpp", "opencv2/legacy.hpp","opencv2/video/tracking.hpp",
-                      "opencv2/video/background_segm.hpp",
-                      "opencv2/videostab.hpp"]
-              elsif opencv_version >= "3.0.0"
+              elsif major == 3
                   ["opencv2/core.hpp", "opencv2/core/base.hpp", "opencv2/core/mat.hpp", "opencv2/core/ocl.hpp",
                    "opencv2/core/opengl.hpp", "opencv2/core/optim.hpp", "opencv2/core/persistence.hpp", "opencv2/core/types.hpp",
                    "opencv2/core/utility.hpp", "opencv2/imgproc.hpp", "opencv2/imgcodecs.hpp", "opencv2/videoio.hpp",
@@ -130,7 +120,7 @@ def find_opencv
                    "opencv2/stitching/detail/seam_finders.hpp", "opencv2/stitching/detail/timelapsers.hpp", "opencv2/videostab/motion_core.hpp",
                    "opencv2/viz/types.hpp", "opencv2/viz/widgets.hpp"]
               else
-                  raise "OpenCV version #{opencv_version} is not supported"
+                  raise "OpenCV version #{opencv_version} is currently not supported"
               end
 
     temp = paths.clone
@@ -155,6 +145,5 @@ def find_opencv
             nil
 	end
     end.compact
-    Rbind.log.warn "found opencv #{opencv_version}: #{paths[0]}"
-    [opencv_version,headers]
+    [major,minor,revision,headers]
 end

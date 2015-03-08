@@ -3,7 +3,9 @@ require 'pp'
 require 'yaml'
 
 require File.join(File.dirname(__FILE__),'helper.rb')
-opencv_version,opencv_headers = find_opencv
+major,minor,revision,opencv_headers = find_opencv
+opencv_version = "#{major}.#{minor}.#{revision}"
+Rbind.log.warn "found opencv #{opencv_version}"
 
 rbind = Rbind::Rbind.new("OpenCV")
 rbind.pkg_config << "opencv"
@@ -19,7 +21,7 @@ end
 
 # add some templates and alias
 rbind.parser.type_alias["const_c_string"] = rbind.c_string.to_const
-if opencv_version >= "3.0.0"
+if major >= 3
     rbind.add_std_types
     rbind.parser.add_type OpenCVPtr2.new
     rbind.cv.add_type(Rbind::RClass.new("ShapeTransformer"))
@@ -45,7 +47,7 @@ rbind.parse_headers
 rbind.parse File.join(File.dirname(__FILE__),"post_opencv244.txt")
 
 # post parsing + patching wrong signatures
-if opencv_version >= "2.4.9" && opencv_version < "3.0.0"
+if major == 2 && minor == 4 && revision>= 9
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
 
     rbind.cv.calcOpticalFlowSF[0].parameter(0).remove_const!
@@ -67,7 +69,7 @@ if opencv_version >= "2.4.9" && opencv_version < "3.0.0"
     rbind.cv.BRISK.operation("BRISK")[1].parameter(0).remove_const!
     rbind.cv.BRISK.operation("BRISK")[1].parameter(1).remove_const!
     rbind.cv.putText.parameter(0).remove_const!
-elsif opencv_version >= "3.0.0"
+elsif major >= 3
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv300.txt")
     rbind.cv.randShuffle.parameter(2).remove_const!
