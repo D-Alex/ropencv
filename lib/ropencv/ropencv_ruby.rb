@@ -352,13 +352,13 @@ module OpenCV
                     Cv::Mat.new(obj.size,1,Cv::CV_64FC1,obj.data,Cv::Mat::AUTO_STEP).__obj_ptr__
                 elsif obj.is_a?(Array)
                     h,w,e= if obj.first.is_a? Array
-                               if obj.find {|array| array.find(Float)}
+                               if obj.find {|array| array.find{|o| o.is_a?(Float) }}
                                    [obj.size,obj.first.size,obj.first.first.to_f]
                                else
                                    [obj.size,obj.first.size,obj.first.first]
                                end
                            else
-                               if obj.find(Float)
+                               if obj.find{|o| o.is_a?(Float) }
                                    [obj.size,1,obj.first.to_f]
                                else
                                    [obj.size,1,obj.first]
