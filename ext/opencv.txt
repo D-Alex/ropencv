@@ -3,6 +3,7 @@ const cv.CV_LKFLOW_PYR_B_READY       2
 const cv.CV_LKFLOW_INITIAL_GUESSES   4
 const cv.CV_LKFLOW_GET_MIN_EIGENVALS 8
 const cv.INT_MAX 2147483647
+const cv.DBL_MAX 1.7976931348623157e+308
 const cv.CV_8U 0
 const cv.CV_8S 1
 const cv.CV_16U 2
