@@ -1,9 +1,4 @@
-require 'minitest/spec'
-require 'ropencv'
-require 'pp'
-include OpenCV
-
-MiniTest.autorun
+require File.expand_path('../test_helper.rb', __FILE__)
 
 describe Cv::Mat do
     before do
