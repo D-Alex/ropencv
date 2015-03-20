@@ -1,0 +1,21 @@
+PATH
+  remote: .
+  specs:
+    ropencv (0.0.20)
+      ffi (~> 1.9.0)
+      rbind (>= 0.0.27)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ffi (1.9.8)
+    minitest (5.5.1)
+    rbind (0.0.27)
+      ffi (>= 1.9.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  minitest (~> 5.5)
+  ropencv!
