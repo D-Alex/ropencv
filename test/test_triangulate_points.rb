@@ -4,7 +4,7 @@ require 'pp'
 include OpenCV
 
 
-MiniTest::Unit.autorun
+MiniTest.autorun
 describe Cv do
     describe "triangulate_points" do
         it "must triangulate the given points" do

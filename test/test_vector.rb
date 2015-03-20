@@ -3,7 +3,8 @@ require 'ropencv'
 require 'pp'
 include OpenCV
 
-MiniTest::Unit.autorun
+MiniTest.autorun
+
 describe Std::Vector::Cv_Point do
     describe "initialize" do
         it "can be created without arguments" do

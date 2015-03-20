@@ -3,7 +3,7 @@ require 'ropencv'
 require 'pp'
 include OpenCV
 
-MiniTest::Unit.autorun
+MiniTest.autorun
 
 describe Cv::Vec2d do
     describe "initialize" do

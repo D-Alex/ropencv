@@ -3,7 +3,8 @@ require 'ropencv'
 require 'pp'
 include OpenCV
 
-MiniTest::Unit.autorun
+MiniTest.autorun
+
 describe Cv::Scalar do
     describe "initialize" do
         it "can be created from 4 values" do

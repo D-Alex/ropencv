@@ -3,7 +3,8 @@ require 'ropencv'
 require 'pp'
 include OpenCV
 
-MiniTest::Unit.autorun
+MiniTest.autorun
+
 describe OpenCV::Cv do
     before do
     end
