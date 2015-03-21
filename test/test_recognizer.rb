@@ -1,5 +1,7 @@
 require File.expand_path('../test_helper.rb', __FILE__)
 
+# opencv FaceRecognizer is optional and part of opencv_contrib
+if defined? OpenCV::Cv::FaceRecognizer
 describe 'cv::createlbph_face_recognizer' do
   describe 'initialization' do
     it 'creates a recognizer instance' do
@@ -33,4 +35,5 @@ describe 'cv::createlbph_face_recognizer' do
       refute conf.read_float.nan?
     end
   end
+end
 end
