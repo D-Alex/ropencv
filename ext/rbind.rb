@@ -38,10 +38,10 @@ else
 end
 
 # parsing
+rbind.use_namespace rbind.std
 rbind.parse File.join(File.dirname(__FILE__),"pre_opencv244.txt")
 rbind.parse File.join(File.dirname(__FILE__),"opencv.txt")
 rbind.use_namespace rbind.cv
-rbind.use_namespace rbind.std
 rbind.cv.type_alias["string"] = rbind.cv.String
 rbind.parse_headers
 rbind.parse File.join(File.dirname(__FILE__),"post_opencv244.txt")

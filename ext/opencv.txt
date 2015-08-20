@@ -643,6 +643,8 @@ cv.FileNode.operator>> void =read_string
     String val /IO
 cv.FileNode.operator>> void =read_mat
     Mat val /IO
+cv.FileNode.operator>> void =read_vector_mat
+    vector_Mat val /IO
 cv.FileNode.begin FileNodeIterator
 cv.FileNode.end FileNodeIterator
 cv.FileNodeIterator.operator++ FileNodeIterator
