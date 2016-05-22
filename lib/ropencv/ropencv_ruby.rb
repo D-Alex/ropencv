@@ -211,8 +211,14 @@ module OpenCV
                 elsif val.is_a?(Float)
                     write_double(val)
                 else
-                    name = val.class.name.split("::").last.downcase
-                    send("write_#{name}",val)
+                    if val.is_a? Std::Vector::Cv_DMatch
+                        write_std_cv_dmatch(val)
+                    elsif val.is_a? Std::Vector::Cv_KeyPoint
+                        write_std_cv_keypoint(val)
+                    else
+                        name = val.class.name.split("::").last.downcase
+                        send("write_#{name}",val)
+                    end
                 end
             end
 

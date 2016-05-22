@@ -16,4 +16,9 @@ cv.recoverPose int
     double focal 1.0
     Point2d pp Point2d(0, 0)
     Mat mask Mat()/IO; /IO
+class cv.FileStorage
+cv.FileStorage.operator<< FileStorage =write_std_cv_keypoint /O
+    vector_KeyPoint val
+cv.FileStorage.operator<< FileStorage =write_std_cv_dmatch /O
+    vector_DMatch val
 
