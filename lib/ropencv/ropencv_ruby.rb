@@ -306,7 +306,7 @@ module OpenCV
 
             def to_int
                 raise RuntimeError, "FileNode is empty" if empty?
-                raise RuntimeError, "FileNode is not storing a double" unless isInt
+                raise RuntimeError, "FileNode is not storing an int" unless isInt
                 p = FFI::MemoryPointer.new(:int,1)
                 read_int(p)
                 p.get_int32 0
