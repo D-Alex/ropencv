@@ -19,4 +19,12 @@ cv.abs Mat
     Mat src
 cv.sum Mat
     Mat src
+cv.norm double
+    Point3f pt
+cv.norm double
+    Point3d pt
+cv.norm double
+    Vec3f vec
+cv.norm double
+    Vec3d vec
 
