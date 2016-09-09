@@ -412,12 +412,12 @@ module OpenCV
                           if i.is_a?(Cv::Point)
                               [i.y,i.x]
                           elsif rows == 1
-                              [0,i]
+                              [0,i.to_i]
                           else
-                              [i,0]
+                              [i.to_i,0]
                           end
                       else
-                          [i,j]
+                          [i.to_i,j.to_i]
                       end
                 if i >= rows || i < 0 || j >= cols || j <0
                     raise ArgumentError,"out of bound #{i}/#{j} #{rows}/#{cols}"
@@ -475,17 +475,18 @@ module OpenCV
                             [k,val]
                         end
                 k ||= 0
+		k = k.to_i
                 raise ArgumentError,"channel #{k} out of bound" if k >= channels
                 i,j,val = if val == nil
                               if i.is_a?(Cv::Point)
                                   [i.y,i.x,j]
                               elsif rows == 1
-                                  [0,i,j]
+                                  [0,i.to_i,j.to_i]
                               else
-                                  [i,0,j]
+                                  [i.to_i,0,j.to_i]
                               end
                           else
-                              [i,j,val]
+                              [i.to_i,j.to_i,val.to_i]
                           end
                 if i >= rows || i < 0 || j >= cols || j <0
                     raise ArgumentError,"out of bound #{i}/#{j}"
