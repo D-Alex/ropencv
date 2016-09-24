@@ -481,12 +481,12 @@ module OpenCV
                               if i.is_a?(Cv::Point)
                                   [i.y,i.x,j]
                               elsif rows == 1
-                                  [0,i.to_i,j.to_i]
+                                  [0,i.to_i,j]
                               else
-                                  [i.to_i,0,j.to_i]
+                                  [i.to_i,0,j]
                               end
                           else
-                              [i.to_i,j.to_i,val.to_i]
+                              [i.to_i,j.to_i,val]
                           end
                 if i >= rows || i < 0 || j >= cols || j <0
                     raise ArgumentError,"out of bound #{i}/#{j}"
