@@ -27,4 +27,5 @@ cv.norm double
     Vec3f vec
 cv.norm double
     Vec3d vec
-
+cv.FileNode.operator>> void =read_vector_keypoint
+    vector_KeyPoint val /IO

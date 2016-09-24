@@ -320,6 +320,14 @@ module OpenCV
                 str
             end
 
+            def to_vector_keypoint
+                raise RuntimeError, "FileNode is empty" if empty?
+                raise RuntimeError, "FileNode is not storing a string" unless isSeq
+                val = Std::Vector.new(Cv::KeyPoint)
+                read_vector_keypoint(val)
+                val
+            end
+
             def method_missing(m,*args)
                 if args.empty? && map?
                     self[m.to_s]
