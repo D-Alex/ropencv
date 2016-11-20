@@ -288,6 +288,14 @@ module OpenCV
                 val
             end
 
+            def to_vector_string
+                raise RuntimeError, "FileNode is empty" if empty?
+                raise RuntimeError, "FileNode is not storing a vector" unless isSeq
+                val = Std::Vector.new(Cv::String)
+                read_vector_string(val)
+                val
+            end
+
             def to_float
                 raise RuntimeError, "FileNode is empty" if empty?
                 raise RuntimeError, "FileNode is not storing a float" unless isReal
