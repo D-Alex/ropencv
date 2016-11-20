@@ -72,6 +72,8 @@ if major == 2 && minor == 4 && revision>= 9
 elsif major >= 3
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv300.txt")
+    rbind.parse File.join(File.dirname(__FILE__),"post_opencv310.txt") if minor >= 1
+
     rbind.cv.randShuffle.parameter(2).remove_const!
     rbind.cv.AlignExposures.process.parameter(1).remove_const!
     rbind.cv.AlignMTB.process[0].parameter(1).remove_const!
