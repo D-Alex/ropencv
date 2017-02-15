@@ -323,6 +323,21 @@ cv.Mat.Mat
 cv.Mat.Mat
     Mat m
 cv.Mat.Mat
+    vector_Point vec
+    bool copy false
+cv.Mat.Mat
+    vector_Point2f vec
+    bool copy false
+cv.Mat.Mat
+    vector_Point2d vec
+    bool copy false
+cv.Mat.Mat
+    vector_Point3f vec
+    bool copy false
+cv.Mat.Mat
+    vector_Point3d vec
+    bool copy false
+cv.Mat.Mat
     Size size
     int type
 cv.Mat.Mat
