@@ -9,6 +9,31 @@ include_directories(${OPENCV_INCLUDE_DIRS})
 link_directories(${OPENCV_LIBRARY_DIRS})
 
 
+# use, i.e. don't skip the full RPATH for the build tree
+SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
+
+# when building, don't use the install RPATH already
+# (but later on when installing)
+SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+
+# the RPATH to be used when installing
+SET(CMAKE_INSTALL_RPATH ${ROOT_FOLDER}/lib/ropencv)
+
+# add the automatically determined parts of the RPATH
+# which point to directories outside the build tree to the insgall RPATH
+SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
+if(APPLE)
+    SET(CMAKE_INSTALL_NAME_DIR ${CMAKE_INSTALL_RPATH})
+    Set(CMAKE_MACOSX_RPATH ON)
+endif(APPLE)
+
+#do not add if system directory
+list(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${install_rpath}" isSystemDir)
+if("${isSystemDir}" STREQUAL "-1")
+    set(CMAKE_INSTALL_RPATH "${install_rpath}")
+endif()
+
 SET(RBIND_SRC
     "${CMAKE_CURRENT_SOURCE_DIR}/types.cc"
     "${CMAKE_CURRENT_SOURCE_DIR}/operations.cc"
