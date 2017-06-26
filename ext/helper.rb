@@ -4,7 +4,7 @@ class OpenCVPtr < Rbind::RTemplateClass
         super
     end
 
-    def specialize(klass,*parameters)
+    def specialize(klass,parameters)
         if parameters.size != 1
             raise ArgumentError,"OpenCVPtr does only support one template parameter. Got: #{parameters}}"
         end
@@ -33,7 +33,7 @@ class OpenCVPtr2 < Rbind::RTemplateClass
         super
     end
 
-    def specialize(klass,*parameters)
+    def specialize(klass,parameters)
         if parameters.size != 1
             raise ArgumentError,"OpenCVPtr2 does only support one template parameter. Got: #{parameters}}"
         end
