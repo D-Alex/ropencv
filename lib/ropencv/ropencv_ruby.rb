@@ -82,7 +82,7 @@ module OpenCV
                 end
             end
             def to_s
-                c_str
+                str_begin.read_string_length(size())
             end
         end
 

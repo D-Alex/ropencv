@@ -45,6 +45,8 @@ rbind.use_namespace rbind.cv
 rbind.cv.type_alias["string"] = rbind.cv.String
 rbind.parse_headers
 rbind.parse File.join(File.dirname(__FILE__),"post_opencv244.txt")
+rbind.cv.String.begin.return_type = rbind.cv.String.begin.return_type.to_const.to_ptr
+rbind.cv.String.end.return_type = rbind.cv.String.end.return_type.to_const.to_ptr
 
 # post parsing + patching wrong signatures
 if major == 2 && minor == 4 && revision>= 9

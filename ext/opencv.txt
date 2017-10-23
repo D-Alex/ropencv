@@ -86,6 +86,8 @@ cv.String.length size_t
 cv.String.operator[] char
     size_t idx
 cv.String.c_str const_c_string
+cv.String.begin char =str_begin
+cv.String.end char =str_end
 cv.String.empty bool
 cv.String.clear void
 cv.String.compare int
