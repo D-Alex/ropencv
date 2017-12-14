@@ -45,4 +45,4 @@ const cv.CV_WND_PROP_AUTOSIZE 1
 const cv.CV_WND_PROP_ASPECT_RATIO 2 
 const cv.CV_WND_PROP_OPENGL 3 
 const cv.InputArray.KINDSHIFT 16
-
+const cv.DBL_EPSILON Float::EPSILON
