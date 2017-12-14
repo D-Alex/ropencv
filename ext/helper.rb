@@ -39,8 +39,19 @@ class OpenCVPtr2 < Rbind::RTemplateClass
         end
         ptr_type = parameters.first
 
+        klass.add_operation Rbind::ROperation.new(klass.name,nil)
         klass.add_operation Rbind::ROperation.new(klass.name,nil,Rbind::RParameter.new("other",klass))
+        klass.add_operation Rbind::ROperation.new(klass.name,nil,Rbind::RParameter.new("owner",klass),Rbind::RParameter.new("p",ptr_type.to_ptr))
         klass.add_operation Rbind::ROperation.new(klass.name,nil,Rbind::RParameter.new("p",ptr_type.to_ptr))
+
+        # add some magic for casting into parent ptr
+        if ptr_type.respond_to? :parent_classes
+            ptr_type.parent_classes.each do |k|
+                t = type("cv::Ptr<#{k.full_name}>")
+                klass.add_operation Rbind::ROperation.new(klass.name,nil,Rbind::RParameter.new("owner",t),Rbind::RParameter.new("p",ptr_type.to_ptr))
+            end
+        end
+
         klass.add_operation Rbind::ROperation.new("release",type("void"))
         klass.add_operation Rbind::ROperation.new("reset",type("void"),Rbind::RParameter.new("p",ptr_type.to_ptr))
         klass.add_operation Rbind::ROperation.new("swap",type("void"),Rbind::RParameter.new("other",klass))
