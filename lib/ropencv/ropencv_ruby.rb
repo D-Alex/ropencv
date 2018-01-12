@@ -536,9 +536,9 @@ module OpenCV
 
             def -(val)
                 if val.is_a? Float
-                    Rbind::cv_mat_operator_minus2( self, val)
+                    Rbind::cv_mat_operator_minus__2( self, val)
                 elsif val.is_a? Fixnum
-                    Rbind::cv_mat_operator_minus3( self, val)
+                    Rbind::cv_mat_operator_minus__3( self, val)
                 else
                     Rbind::cv_mat_operator_minus( self, val)
                 end
@@ -546,9 +546,9 @@ module OpenCV
 
             def +(val)
                 if val.is_a? Float
-                    Rbind::cv_mat_operator_plus2( self, val)
+                    Rbind::cv_mat_operator_plus__2( self, val)
                 elsif val.is_a? Fixnum
-                    Rbind::cv_mat_operator_plus3( self, val)
+                    Rbind::cv_mat_operator_plus__3( self, val)
                 else
                     Rbind::cv_mat_operator_plus( self, val)
                 end
@@ -556,9 +556,9 @@ module OpenCV
 
             def /(val)
                 if val.is_a? Float
-                    Rbind::cv_mat_operator_div2( self, val)
+                    Rbind::cv_mat_operator_div__2( self, val)
                 elsif val.is_a? Fixnum
-                    Rbind::cv_mat_operator_div3( self, val)
+                    Rbind::cv_mat_operator_div__3( self, val)
                 else
                     Rbind::cv_mat_operator_div( self, val)
                 end
@@ -566,9 +566,9 @@ module OpenCV
 
             def *(val)
                 if val.is_a? Float
-                    Rbind::cv_mat_operator_mult2( self, val)
+                    Rbind::cv_mat_operator_mult__2( self, val)
                 elsif val.is_a? Fixnum
-                    Rbind::cv_mat_operator_mult3( self, val)
+                    Rbind::cv_mat_operator_mult__3( self, val)
                 else
                     Rbind::cv_mat_operator_mult( self, val)
                 end
