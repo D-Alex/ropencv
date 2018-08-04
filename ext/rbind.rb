@@ -71,7 +71,7 @@ if major == 2 && minor == 4 && revision>= 9
     rbind.cv.BRISK.operation("BRISK")[1].parameter(0).remove_const!
     rbind.cv.BRISK.operation("BRISK")[1].parameter(1).remove_const!
     rbind.cv.putText.parameter(0).remove_const!
-elsif major >= 3
+elsif major == 3 
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv300.txt")
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv310.txt") if minor >= 1
@@ -84,6 +84,28 @@ elsif major >= 3
     rbind.CvSlice.ignore = true
     rbind.CvTermCriteria.ignore = true
     rbind.cv.polyfit.ignore = true
+
+    # is removed on opencv master
+    rbind.ml.StatModel.getParams.ignore = true if(rbind.ml.StatModel.operation?('getParams'))
+
+    # is removed on opencv master
+    # mark none polymorphic class
+    rbind.ml.DTrees.Params.polymorphic = false if(rbind.ml.DTrees.type?("Params"))
+elsif major >= 4
+    rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
+    rbind.parse File.join(File.dirname(__FILE__),"post_opencv300.txt")
+
+    rbind.cv.randShuffle.parameter(2).remove_const!
+    rbind.cv.AlignExposures.process.parameter(1).remove_const!
+    rbind.cv.AlignMTB.process[0].parameter(1).remove_const!
+    rbind.cv.AlignMTB.process[1].parameter(1).remove_const!
+    rbind.CvDTreeNode.ignore = true
+    rbind.CvSlice.ignore = true
+    rbind.CvTermCriteria.ignore = true
+    rbind.cv.polyfit.ignore = true
+    rbind.cv.FlannBasedMatcher.write[0].ignore = true
+    rbind.cv.FlannBasedMatcher.write[1].ignore = true
+    rbind.cv.FlannBasedMatcher.read[0].ignore = true
 
     # is removed on opencv master
     rbind.ml.StatModel.getParams.ignore = true if(rbind.ml.StatModel.operation?('getParams'))
