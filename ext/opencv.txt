@@ -55,8 +55,6 @@ const cv.CV_LOAD_IMAGE_COLOR 1
 const cv.CV_LOAD_IMAGE_ANYDEPTH 2
 const cv.CV_LOAD_IMAGE_ANYCOLOR 4
 const cv.CV_LOAD_IMAGE_IGNORE_ORIENTATION 128
-const cv.NORM_HAMMING 6
-const cv.NORM_HAMMING2 7
 class cv.Range
     int start /RW
     int end   /RW
@@ -480,13 +478,6 @@ cv.Mat.ptr uchar*
     int i2
 cv.Mat.operator () Mat =block
     Rect rect
-const cv.Mat.MAGIC_VAL 0x42FF0000
-const cv.Mat.AUTO_STEP 0
-const cv.Mat.CONTINUOUS_FLAG CV_MAT_CONT_FLAG
-const cv.Mat.SUBMATRIX_FLAG CV_SUBMAT_FLAG
-const cv.Mat.MAGIC_MASK 0xFFFF0000
-const cv.Mat.TYPE_MASK 0x00000FFF
-const cv.Mat.DEPTH_MASK 7
 class cv.RNG
     uint64 state
 cv.RNG.RNG
