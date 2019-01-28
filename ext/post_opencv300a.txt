@@ -1,0 +1,19 @@
+class cv.String
+cv.String.String
+cv.String.String
+    c_string str
+    size_t length
+cv.String.String
+    String other
+cv.String.size size_t
+cv.String.length size_t
+cv.String.operator[] char
+    size_t idx
+cv.String.c_str const_c_string
+cv.String.empty bool
+cv.String.clear void
+cv.String.compare int
+    String str
+cv.String.swap void
+    String str /IO
+

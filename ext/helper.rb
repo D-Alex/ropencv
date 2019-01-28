@@ -93,15 +93,24 @@ end
 
 # find opencv version and headers needed to be parsed by rbind
 def find_opencv
-    # find opencv header path
-    out = IO.popen("pkg-config --cflags-only-I opencv")
-    paths = out.read.split("-I").delete_if(&:empty?).map do |i|
-        i.gsub("\n","").gsub(" ","")
+    # find opencv4 header path
+
+    pkg = nil
+    paths = nil
+    ["opencv4","opencv"].each do |p|
+        out = IO.popen("pkg-config --cflags-only-I #{p}")
+        paths = out.read.split("-I").delete_if(&:empty?).map do |i|
+            i.gsub("\n","").gsub(" ","")
+        end
+        if !paths.empty?
+            pkg = p
+            break
+        end
     end
     raise "Cannot find OpenCV" if paths.empty?
 
     #check opencv version
-    out = IO.popen("pkg-config --modversion opencv")
+    out = IO.popen("pkg-config --modversion #{pkg}")
     opencv_version = out.read.chomp;
     opencv_version =~ /(\d+).(\d+).(\d+)/
     major = $1.to_i; minor = $2.to_i; revision = $3.to_i

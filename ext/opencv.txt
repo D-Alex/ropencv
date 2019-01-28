@@ -11,6 +11,7 @@ const cv.CV_16S 3
 const cv.CV_32S 4
 const cv.CV_32F 5
 const cv.CV_64F 6
+const cv.CV_16F 7
 const cv.CV_8UC1 (1-1)*8 + CV_8U
 const cv.CV_8UC2 (2-1)*8 + CV_8U
 const cv.CV_8UC3 (3-1)*8 + CV_8U
@@ -54,6 +55,8 @@ const cv.CV_LOAD_IMAGE_COLOR 1
 const cv.CV_LOAD_IMAGE_ANYDEPTH 2
 const cv.CV_LOAD_IMAGE_ANYCOLOR 4
 const cv.CV_LOAD_IMAGE_IGNORE_ORIENTATION 128
+const cv.NORM_HAMMING 6
+const cv.NORM_HAMMING2 7
 class cv.Range
     int start /RW
     int end   /RW
@@ -74,26 +77,6 @@ cv.Range.operator+ Range
     int delta
 cv.Range.operator- Range
     int delta
-class cv.String
-cv.String.String
-cv.String.String
-    c_string str
-    size_t length
-cv.String.String
-    String other
-cv.String.size size_t
-cv.String.length size_t
-cv.String.operator[] char
-    size_t idx
-cv.String.c_str const_c_string
-cv.String.begin char =str_begin
-cv.String.end char =str_end
-cv.String.empty bool
-cv.String.clear void
-cv.String.compare int
-    String str
-cv.String.swap void
-    String str /IO
 class cv.Scalar
     double* val
 cv.Scalar.Scalar
@@ -673,10 +656,120 @@ cv.FileNode.operator>> void =read_vector_string
 cv.FileNode.begin FileNodeIterator
 cv.FileNode.end FileNodeIterator
 cv.FileNodeIterator.operator++ FileNodeIterator
-cv.FileNodeIterator.operator-- FileNodeIterator
 cv.FileNodeIterator.operator* FileNode =to_node
 cv.FileNodeIterator.operator== bool
     FileNodeIterator other
 cv.FileNodeIterator.operator!= bool
     FileNodeIterator other
-
+class cv.UMat
+    int flags
+    int rows
+    int cols
+    size_t step
+cv.UMat.UMat
+cv.UMat.UMat
+    UMat m
+cv.UMat.UMat
+    vector_Point vec
+    bool copy false
+cv.UMat.UMat
+    vector_Point2f vec
+    bool copy false
+cv.UMat.UMat
+    vector_Point2d vec
+    bool copy false
+cv.UMat.UMat
+    vector_Point3f vec
+    bool copy false
+cv.UMat.UMat
+    vector_Point3d vec
+    bool copy false
+cv.UMat.row UMat
+    int y
+cv.UMat.col UMat
+    int c
+cv.UMat.rowRange UMat
+    int startrow
+    int endrow
+cv.UMat.rowRange UMat
+        Range r
+cv.UMat.colRange UMat
+    int startcol
+    int endcol
+cv.UMat.colRange UMat
+    Range r
+cv.UMat.diag UMat
+    int d 0
+cv.UMat.clone UMat
+cv.UMat.copyTo void
+    UMat m /O
+cv.UMat.copyTo void
+    UMat m /O
+    UMat mask /IO
+cv.UMat.convertTo void
+    UMat m /O
+    int rtype
+    double alpha 1
+    double beta 0
+cv.UMat.assignTo void
+    UMat m /O
+    int type -1
+cv.UMat.reshape UMat
+    int cn
+    int rows 0
+cv.UMat.t UMat
+cv.UMat.inv UMat
+    int method DECOMP_LU
+cv.UMat.mul UMat
+    UMat m
+    double scale 1
+cv.UMat.dot double
+    UMat m
+cv.UMat.diag UMat /S
+    UMat d
+cv.UMat.zeros UMat /S
+    int rows
+    int cols
+    int type
+cv.UMat.zeros UMat /S
+    Size size
+    int type
+cv.UMat.ones UMat /S
+    int rows
+    int cols
+    int type
+cv.UMat.ones UMat /S
+    Size size
+    int type
+cv.UMat.eye UMat /S
+    int rows
+    int cols
+    int type
+cv.UMat.eye UMat /S
+    Size size
+    int type
+cv.UMat.create void
+    int rows
+    int cols
+    int type
+cv.UMat.create void
+    Size size
+    int type
+cv.UMat.isContinuous bool
+cv.UMat.isSubmatrix bool
+cv.UMat.elemSize size_t
+cv.UMat.elemSize1 size_t
+cv.UMat.size Size
+cv.UMat.type int
+cv.UMat.depth int
+cv.UMat.channels int
+cv.UMat.step1 size_t
+    int i 0
+cv.UMat.empty bool
+cv.UMat.total size_t
+cv.UMat.checkVector int
+    int elemChannels
+    int depth -1
+    bool requireContinuous true
+cv.UMat.operator () UMat =block
+    Rect rect

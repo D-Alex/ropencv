@@ -8,7 +8,6 @@ opencv_version = "#{major}.#{minor}.#{revision}"
 Rbind.log.warn "found opencv #{opencv_version}"
 
 rbind = Rbind::Rbind.new("OpenCV")
-rbind.pkg_config << "opencv"
 rbind.includes = opencv_headers
 
 # add Vec types
@@ -21,18 +20,36 @@ end
 
 # add some templates and alias
 rbind.parser.type_alias["const_c_string"] = rbind.c_string.to_const
-if major >= 3
+if major >= 3 && major < 4
+    rbind.pkg_config << "opencv"
     rbind.add_std_types
+    rbind.cv.add_type(Rbind::RClass.new("String"))
+    rbind.cv.type_alias["string"] = rbind.cv.String
     rbind.parser.add_type OpenCVPtr2.new
     rbind.cv.add_type(Rbind::RClass.new("ShapeTransformer"))
     rbind.cv.add_type(Rbind::RClass.new("Feature2D"))
+    rbind.cv.add_type(Rbind::RClass.new("KeyPoint"))
+    rbind.cv.add_type(Rbind::RClass.new("DMatch"))
     rbind.cv.type_alias["FeatureDetector"] = rbind.cv.Feature2D
     rbind.cv.type_alias["DescriptorExtractor"] = rbind.cv.Feature2D
-    # add missing enum values
-    rbind.cv.add_type(Rbind::RClass.new("Stitcher"))
-    rbind.cv.Stitcher.add_type(Rbind::REnum.new("Status"))
-    rbind.cv.Stitcher.Status.values = {:OK => 0, :ERR_NEED_MORE_IMGS => 1,:ERR_HOMOGRAPHY_EST_FAIL => 2,:ERR_CAMERA_PARAMS_ADJUST_FAIL => 3}
+elsif major >= 4
+    rbind.pkg_config << "opencv4"
+    rbind.add_std_types
+    rbind.cv.type_alias["string"] = rbind.std.string
+    rbind.cv.type_alias["String"] = rbind.std.string
+    rbind.parser.add_type OpenCVPtr2.new
+    rbind.cv.add_type(Rbind::RClass.new("Feature2D"))
+    rbind.cv.add_type(Rbind::RClass.new("KeyPoint"))
+    rbind.cv.add_type(Rbind::RClass.new("DMatch"))
+    rbind.cv.type_alias["FeatureDetector"] = rbind.cv.Feature2D
+    rbind.cv.type_alias["DescriptorExtractor"] = rbind.cv.Feature2D
+    rbind.cv.add_namespace("detail")
+    rbind.cv.detail.add_type(Rbind::RClass.new("GraphCutSeamFinderBase"))
+    rbind.cv.detail.add_type(Rbind::RClass.new("ImageFeatures"))
+    rbind.cv.detail.add_type(Rbind::RClass.new("CameraParams"))
+    rbind.cv.detail.add_type(Rbind::RClass.new("MatchesInfo"))
 else
+    rbind.pkg_config << "opencv"
     rbind.add_std_vector
     rbind.parser.add_type OpenCVPtr.new
 end
@@ -42,11 +59,10 @@ rbind.use_namespace rbind.std
 rbind.parse File.join(File.dirname(__FILE__),"pre_opencv244.txt")
 rbind.parse File.join(File.dirname(__FILE__),"opencv.txt")
 rbind.use_namespace rbind.cv
-rbind.cv.type_alias["string"] = rbind.cv.String
 rbind.parse_headers
 rbind.parse File.join(File.dirname(__FILE__),"post_opencv244.txt")
-rbind.cv.String.begin.return_type = rbind.cv.String.begin.return_type.to_const.to_ptr
-rbind.cv.String.end.return_type = rbind.cv.String.end.return_type.to_const.to_ptr
+#rbind.cv.String.begin.return_type = rbind.cv.String.begin.return_type.to_const.to_ptr
+#rbind.cv.String.end.return_type = rbind.cv.String.end.return_type.to_const.to_ptr
 
 # post parsing + patching wrong signatures
 if major == 2 && minor == 4 && revision>= 9
@@ -74,10 +90,11 @@ if major == 2 && minor == 4 && revision>= 9
 elsif major == 3 
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv300.txt")
+    rbind.parse File.join(File.dirname(__FILE__),"post_opencv300a.txt")
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv310.txt") if minor >= 1
 
-    rbind.cv.randShuffle.parameter(2).remove_const!
-    rbind.cv.AlignExposures.process.parameter(1).remove_const!
+#    rbind.cv.randShuffle.parameter(2).remove_const!
+#    rbind.cv.AlignExposures.process.parameter(1).remove_const!
     rbind.cv.AlignMTB.process[0].parameter(1).remove_const!
     rbind.cv.AlignMTB.process[1].parameter(1).remove_const!
     rbind.CvDTreeNode.ignore = true
@@ -94,9 +111,8 @@ elsif major == 3
 elsif major >= 4
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv249.txt")
     rbind.parse File.join(File.dirname(__FILE__),"post_opencv300.txt")
+    rbind.parse File.join(File.dirname(__FILE__),"post_opencv400.txt")
 
-    rbind.cv.randShuffle.parameter(2).remove_const!
-    rbind.cv.AlignExposures.process.parameter(1).remove_const!
     rbind.cv.AlignMTB.process[0].parameter(1).remove_const!
     rbind.cv.AlignMTB.process[1].parameter(1).remove_const!
     rbind.CvDTreeNode.ignore = true
@@ -106,6 +122,13 @@ elsif major >= 4
     rbind.cv.FlannBasedMatcher.write[0].ignore = true
     rbind.cv.FlannBasedMatcher.write[1].ignore = true
     rbind.cv.FlannBasedMatcher.read[0].ignore = true
+    # issues with UMat
+    rbind.detail.NoExposureCompensator.feed.ignore = true
+    rbind.detail.GainCompensator.feed.ignore = true
+    rbind.detail.BlocksGainCompensator.feed.ignore = true
+
+    # issues with enum using full namespace name
+    rbind.cv.HOGDescriptor.ignore = true
 
     # is removed on opencv master
     rbind.ml.StatModel.getParams.ignore = true if(rbind.ml.StatModel.operation?('getParams'))

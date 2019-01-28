@@ -1,0 +1,30 @@
+cv.UMat.getMat Mat
+    AccessFlag flags
+cv.UMat.UMat
+    Size size
+    int type
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.UMat
+    int rows
+    int cols
+    int type
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.UMat
+    int rows
+    int cols
+    int type
+    Scalar scalar
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.UMat
+    Size size
+    int type
+    Scalar scalar
+    UMatUsageFlags usageFlags USAGE_DEFAULT
+cv.UMat.UMat
+    UMat m
+    Range row_range
+    Range col_range Range::all()
+cv.UMat.UMat
+    UMat m
+    Rect roi
+
