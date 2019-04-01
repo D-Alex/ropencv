@@ -206,7 +206,7 @@ module OpenCV
             end
 
             def <<(val)
-                if val.is_a?(Fixnum)
+                if val.is_a?(1.class)
                     write_int(val)
                 elsif val.is_a?(Float)
                     write_double(val)
@@ -394,7 +394,7 @@ module OpenCV
                                    [obj.size,1,obj.first]
                                end
                            end
-                    setter,step,type = if e.is_a? Fixnum
+                    setter,step,type = if e.is_a? 1.class
                                            [:put_array_of_int32,4*w,CV_32SC1]
                                        elsif e.is_a? Float
                                            [:put_array_of_float64,8*w,CV_64FC1]
@@ -461,7 +461,7 @@ module OpenCV
                 case other
                 when Float
                     [other,to_f]
-                when Fixnum 
+                when 1.class 
                     [other,to_i]
                 else
                     raise TypeError, "#{self.class} can't be coerced into #{other.class}"
@@ -537,7 +537,7 @@ module OpenCV
             def -(val)
                 if val.is_a? Float
                     Rbind::cv_mat_operator_minus__2( self, val)
-                elsif val.is_a? Fixnum
+                elsif val.is_a? 1.class
                     Rbind::cv_mat_operator_minus__3( self, val)
                 else
                     Rbind::cv_mat_operator_minus( self, val)
@@ -547,7 +547,7 @@ module OpenCV
             def +(val)
                 if val.is_a? Float
                     Rbind::cv_mat_operator_plus__2( self, val)
-                elsif val.is_a? Fixnum
+                elsif val.is_a? 1.class
                     Rbind::cv_mat_operator_plus__3( self, val)
                 else
                     Rbind::cv_mat_operator_plus( self, val)
@@ -557,7 +557,7 @@ module OpenCV
             def /(val)
                 if val.is_a? Float
                     Rbind::cv_mat_operator_div__2( self, val)
-                elsif val.is_a? Fixnum
+                elsif val.is_a? 1.class
                     Rbind::cv_mat_operator_div__3( self, val)
                 else
                     Rbind::cv_mat_operator_div( self, val)
@@ -567,7 +567,7 @@ module OpenCV
             def *(val)
                 if val.is_a? Float
                     Rbind::cv_mat_operator_mult__2( self, val)
-                elsif val.is_a? Fixnum
+                elsif val.is_a? 1.class
                     Rbind::cv_mat_operator_mult__3( self, val)
                 else
                     Rbind::cv_mat_operator_mult( self, val)
