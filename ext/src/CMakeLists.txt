@@ -5,11 +5,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 include(FindPkgConfig)
-pkg_check_modules(OPENCV REQUIRED opencv)
-add_definitions(${OPENCV_CFLAGS})
+find_package(OpenCV REQUIRED)
 include_directories(${OPENCV_INCLUDE_DIRS})
-link_directories(${OPENCV_LIBRARY_DIRS})
-
 
 # use, i.e. don't skip the full RPATH for the build tree
 SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
@@ -42,10 +39,9 @@ SET(RBIND_SRC
     "${CMAKE_CURRENT_SOURCE_DIR}/conversions.cc")
 
 add_custom_command(OUTPUT ${RBIND_SRC}
-       COMMAND ruby "${CMAKE_CURRENT_SOURCE_DIR}/../rbind.rb")
-
+    COMMAND ruby "${CMAKE_CURRENT_SOURCE_DIR}/../rbind.rb" ARGS "\"${FIND_PACKAGE_MESSAGE_DETAILS_OpenCV}\"")
 ADD_LIBRARY(rbind_opencv SHARED ${RBIND_SRC})
-TARGET_LINK_LIBRARIES(rbind_opencv ${OPENCV_LIBS} ${OPENCV_LDFLAGS_OTHER} ${OPENCV_LIBRARIES})
+TARGET_LINK_LIBRARIES(rbind_opencv ${OpenCV_LIBS})
 
 set(ROOT_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 install(TARGETS rbind_opencv LIBRARY DESTINATION ${ROOT_FOLDER}/lib/ropencv)

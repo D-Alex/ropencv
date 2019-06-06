@@ -92,26 +92,15 @@ class Vec < Rbind::RClass
 end
 
 # find opencv version and headers needed to be parsed by rbind
-def find_opencv
-    # find opencv4 header path
-
-    pkg = nil
-    paths = nil
-    ["opencv4","opencv"].each do |p|
-        out = IO.popen("pkg-config --cflags-only-I #{p}")
-        paths = out.read.split("-I").delete_if(&:empty?).map do |i|
-            i.gsub("\n","").gsub(" ","")
-        end
-        if !paths.empty?
-            pkg = p
-            break
-        end
+def find_opencv(hint)
+    hint =~ /\[(.*)\]\[v(.*)\(\)\]/
+    paths = [$1]
+    opencv_version = $2
+    if !opencv_version || !paths
+        raise "hint #{hint} is not encoding opencv loaction and version. It must have the format [PATH][vMAJOR.MINRO.REVISION()]"
     end
-    raise "Cannot find OpenCV" if paths.empty?
+    paths << File.join(paths.first,"include")
 
-    #check opencv version
-    out = IO.popen("pkg-config --modversion #{pkg}")
-    opencv_version = out.read.chomp;
     opencv_version =~ /(\d+).(\d+).(\d+)/
     major = $1.to_i; minor = $2.to_i; revision = $3.to_i
 
@@ -153,15 +142,6 @@ def find_opencv
               else
                   raise "OpenCV version #{opencv_version} is currently not supported"
               end
-
-    temp = paths.clone
-    temp.each do |path|
-	if path =~ /(.*)opencv$/
-	    paths << $1
-	elsif path =~ /(.*)opencv2$/
-	    paths << $1
-        end
-    end
 
     # check that all headers are available
     headers = headers.map do |i|
