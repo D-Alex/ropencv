@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
     s.name              = 'ropencv'
-    s.version           = '0.0.30'
+    s.version           = '0.0.32'
     s.date              = '2019-06-06'
     s.platform          = Gem::Platform::RUBY
     s.authors           = ['Alexander Duda']
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
     s.require_path      = 'lib'
     s.required_rubygems_version = ">= 1.3.6"
     s.add_runtime_dependency "rbind", ">= 0.0.30"
-    s.add_runtime_dependency "ffi", "~> 1.9.0"
+    s.add_runtime_dependency "ffi", ">= 1.9.0"
     s.add_development_dependency 'minitest', '~> 5.5'
     s.extensions = ['ext/extconf.rb']
     s.license = 'BSD'
