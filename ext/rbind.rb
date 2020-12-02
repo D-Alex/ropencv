@@ -149,6 +149,7 @@ rbind.parser.type("std::vector<uint64_t>")
 rbind.parser.type("std::vector<int8_t>")
 rbind.parser.type("std::vector<int64_t>")
 rbind.parser.type("std::vector<Scalar>")
+rbind.parser.type("std::vector<Range>")
 rbind.parser.type("std::vector<std::vector<Point2d> >")
 
 # add some extra documentation
