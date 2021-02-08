@@ -49,6 +49,10 @@ elsif major >= 4
     rbind.cv.detail.add_type(Rbind::RClass.new("ImageFeatures"))
     rbind.cv.detail.add_type(Rbind::RClass.new("CameraParams"))
     rbind.cv.detail.add_type(Rbind::RClass.new("MatchesInfo"))
+    if(minor >= 5)
+        rbind.cv.add_type(Rbind::RClass.new("HistogramCostExtractor"))
+        rbind.cv.add_type(Rbind::RClass.new("ShapeTransformer"))
+    end
 else
     rbind.pkg_config << "opencv"
     rbind.add_std_vector
@@ -137,6 +141,11 @@ elsif major >= 4
     # is removed on opencv master
     # mark none polymorphic class
     rbind.ml.DTrees.Params.polymorphic = false if(rbind.ml.DTrees.type?("Params"))
+
+    if minor >= 5
+        puts "Here"
+        rbind.cv.createShapeContextDistanceExtractor.ignore = true
+    end
 end
 
 # add some more vector types
