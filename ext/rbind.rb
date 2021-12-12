@@ -49,7 +49,7 @@ elsif major >= 4
     rbind.cv.detail.add_type(Rbind::RClass.new("ImageFeatures"))
     rbind.cv.detail.add_type(Rbind::RClass.new("CameraParams"))
     rbind.cv.detail.add_type(Rbind::RClass.new("MatchesInfo"))
-    if(minor >= 2)
+    if(minor == 2)
         rbind.cv.add_type(Rbind::RClass.new("HistogramCostExtractor"))
         rbind.cv.add_type(Rbind::RClass.new("ShapeTransformer"))
     end
@@ -142,7 +142,7 @@ elsif major >= 4
     # mark none polymorphic class
     rbind.ml.DTrees.Params.polymorphic = false if(rbind.ml.DTrees.type?("Params"))
 
-    if minor >= 2
+    if minor == 2
         rbind.cv.createShapeContextDistanceExtractor.ignore = true
     end
 end
