@@ -155,6 +155,7 @@ rbind.parser.type("std::vector<Vec4i>")
 rbind.parser.type("std::vector<uint32_t>")
 rbind.parser.type("std::vector<uint64_t>")
 rbind.parser.type("std::vector<int8_t>")
+rbind.parser.type("std::vector<int>")
 rbind.parser.type("std::vector<int64_t>")
 rbind.parser.type("std::vector<Scalar>")
 rbind.parser.type("std::vector<Range>")
@@ -189,6 +190,18 @@ Rbind::GeneratorRuby.on_normalize_default_value do |parameter|
     if parameter.default_value =~ /.*makePtr<(.*)>\(\)/
         "cv::Ptr<#{$1}>(new #{$1})"
     end
+end
+
+# convert some types to ruby types and attach object pointer
+rbind.cv.String.overwrite_ruby do 
+  %{obj = String.new(ptr) 
+	str = obj.to_s
+	def str.__obj_ptr__(obj=nil)
+		@__obj__ ||= obj
+		@__obj__.__obj_ptr__
+	end
+	str.__obj_ptr__(obj)
+	str}
 end
 
 # add version
