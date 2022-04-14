@@ -27,4 +27,12 @@ cv.UMat.UMat
 cv.UMat.UMat
     UMat m
     Rect roi
+cv.Vec3f.dot float
+    Vec3f val
+cv.Vec3f.cross Vec3f
+    Vec3f val
+cv.Vec3d.dot double
+    Vec3d val
+cv.Vec3d.cross Vec3d
+    Vec3d val
 
